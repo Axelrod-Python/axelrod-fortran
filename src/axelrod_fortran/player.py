@@ -17,22 +17,6 @@ original_actions = {
 }
 
 
-def original_strategy(
-    name, their_last_move, move_number, my_score, their_score, noise,
-    my_last_move
-):
-    strategy = strategies[name]
-    strategy.argtypes = (
-        POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int),
-        POINTER(c_float))
-    strategy.restype = c_int
-    args = (
-        c_int(their_last_move), c_int(move_number), c_int(my_score),
-        c_int(their_score), c_float(noise), c_int(my_last_move))
-    action = strategy(*[byref(arg) for arg in args])
-    return actions[action]
-
-
 class Player(axl.Player):
 
     def __init__(self, original_name):
@@ -45,6 +29,11 @@ class Player(axl.Player):
         """
         super().__init__()
         self.original_name = original_name
+        self.original_function = strategies[self.original_name]
+        self.original_function.argtypes = (
+            POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int),
+            POINTER(c_float))
+        self.original_function.restype = c_int
 
     @property
     def original_name(self):
@@ -54,6 +43,16 @@ class Player(axl.Player):
     def original_name(self, value):
         # TODO Validate the value against list of known fortran functions
         self.__original_name = value
+
+    def original_strategy(
+        self, their_last_move, move_number, my_score, their_score, noise,
+        my_last_move
+    ):
+        args = (
+            c_int(their_last_move), c_int(move_number), c_int(my_score),
+            c_int(their_score), c_float(noise), c_int(my_last_move))
+        action = self.original_function(*[byref(arg) for arg in args])
+        return actions[action]
 
     def strategy(self, opponent, noise=0):
         try:
@@ -68,6 +67,6 @@ class Player(axl.Player):
             my_last_move = original_actions[self.history[-1]]
         except IndexError:
             my_last_move = 0
-        return original_strategy(
-            self.original_name, their_last_move, move_number, scores[0],
-            scores[1], noise, my_last_move)
+        return self.original_strategy(
+            their_last_move, move_number, scores[0], scores[1], noise,
+            my_last_move)
