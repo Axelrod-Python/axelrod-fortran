@@ -1,18 +1,25 @@
 import axelrod.player as axl
 from axelrod.interaction_utils import compute_final_score
 from axelrod.action import Action
+from ctypes import cdll, c_int, c_float, byref, POINTER
 
 C, D = Action.C, Action.D
+strategies = cdll.LoadLibrary('libstrategies.so')
 
 
 def original_strategy(
-    their_last_move, move_number, my_score, their_score, noise, my_last_move
+    name, their_last_move, move_number, my_score, their_score, noise,
+    my_last_move
 ):
-    # TODO
-    # Convert the arguments to ctypes
-    # call the fortran function
-    # Convert the result to an Action and return it
-    return C
+    strategy = strategies['name']
+    strategy.argtypes = (
+        POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int),
+        POINTER(c_float))
+    strategy.restype = c_int
+    args = (
+        c_int(their_last_move), c_int(move_number), c_int(my_score),
+        c_int(their_score), c_float(noise), c_int(my_last_move))
+    return strategy(*[byref(arg) for arg in args])
 
 
 class Player(axl.Player):
@@ -43,5 +50,5 @@ class Player(axl.Player):
         scores = compute_final_score(zip(self.history, self.opponent.history))
         my_last_move = self.history[-1]
         return original_strategy(
-            their_last_move, move_number, scores[0], scores[1], noise,
-            my_last_move)
+            self.original_name, their_last_move, move_number, scores[0],
+            scores[1], noise, my_last_move)
