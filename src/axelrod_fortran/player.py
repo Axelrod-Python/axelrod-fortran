@@ -6,12 +6,22 @@ from ctypes import cdll, c_int, c_float, byref, POINTER
 C, D = Action.C, Action.D
 strategies = cdll.LoadLibrary('libstrategies.so')
 
+actions = {
+    0: C,
+    1: D
+}
+
+original_actions = {
+    C: 0,
+    D: 0
+}
+
 
 def original_strategy(
     name, their_last_move, move_number, my_score, their_score, noise,
     my_last_move
 ):
-    strategy = strategies['name']
+    strategy = strategies[name]
     strategy.argtypes = (
         POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int),
         POINTER(c_float))
@@ -19,7 +29,8 @@ def original_strategy(
     args = (
         c_int(their_last_move), c_int(move_number), c_int(my_score),
         c_int(their_score), c_float(noise), c_int(my_last_move))
-    return strategy(*[byref(arg) for arg in args])
+    action = strategy(*[byref(arg) for arg in args])
+    return actions[action]
 
 
 class Player(axl.Player):
@@ -45,10 +56,18 @@ class Player(axl.Player):
         self.__original_name = value
 
     def strategy(self, opponent, noise=0):
-        their_last_move = self.opponent.history[-1]
+        try:
+            their_last_move = original_actions[opponent.history[-1]]
+        except IndexError:
+            their_last_move = 0
         move_number = len(self.history) + 1
-        scores = compute_final_score(zip(self.history, self.opponent.history))
-        my_last_move = self.history[-1]
+        scores = compute_final_score(zip(self.history, opponent.history))
+        if scores is None:
+            scores = (0, 0)
+        try:
+            my_last_move = original_actions[self.history[-1]]
+        except IndexError:
+            my_last_move = 0
         return original_strategy(
             self.original_name, their_last_move, move_number, scores[0],
             scores[1], noise, my_last_move)
