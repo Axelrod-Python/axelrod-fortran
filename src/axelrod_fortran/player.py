@@ -22,7 +22,8 @@ class Player(axl.Player):
         Parameters
         ----------
         original_name: str
-            The name of the fortran function from the original axelrod tournament
+            The name of the fortran function from the original axelrod
+            tournament
         """
         super().__init__()
         self.original_name = original_name
