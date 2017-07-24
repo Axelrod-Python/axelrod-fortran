@@ -66,7 +66,7 @@ setup(
         # eg: 'keyword1', 'keyword2', 'keyword3',
     ],
     install_requires=[
-        axelrod==3.1.2,
+        'axelrod == 3.1.2',
     ],
     extras_require={
         # eg:
