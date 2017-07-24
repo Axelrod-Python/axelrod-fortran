@@ -13,7 +13,7 @@ actions = {
 
 original_actions = {
     C: 0,
-    D: 0
+    D: 1
 }
 
 
@@ -55,18 +55,15 @@ class Player(axl.Player):
         return actions[action]
 
     def strategy(self, opponent, noise=0):
-        try:
-            their_last_move = original_actions[opponent.history[-1]]
-        except IndexError:
+        if not self.history:
             their_last_move = 0
-        move_number = len(self.history) + 1
-        scores = compute_final_score(zip(self.history, opponent.history))
-        if scores is None:
             scores = (0, 0)
-        try:
-            my_last_move = original_actions[self.history[-1]]
-        except IndexError:
             my_last_move = 0
+        else:
+            their_last_move = original_actions[opponent.history[-1]]
+            scores = compute_final_score(zip(self.history, opponent.history))
+            my_last_move = original_actions[self.history[-1]]
+        move_number = len(self.history) + 1
         return self.original_strategy(
             their_last_move, move_number, scores[0], scores[1], noise,
             my_last_move)
