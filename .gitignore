@@ -63,5 +63,7 @@ docs/_build
 .appveyor.token
 *.bak
 
+.hypothesis
+
 *.sublime-project
 *.sublime-workspace
