@@ -1,9 +1,13 @@
 from axelrod_fortran.strategies import all_strategies
 from axelrod_fortran.player import Player
+from axelrod import Alternator, Cooperator, Defector, Match
+from axelrod.action import Action
 from ctypes import c_int, c_float, POINTER
 
 from hypothesis import given
 from hypothesis.strategies import integers
+
+C, D = Action.C, Action.D
 
 
 def test_init():
@@ -33,3 +37,13 @@ def test_original_strategy(
         if action not in (0, 1):
             print(f'{strategy} returned {action}')
         assert action in (0, 1)
+
+
+def test_matches():
+    for strategy in all_strategies:
+        for opponent in (Alternator, Cooperator, Defector):
+            players = (Player(strategy), opponent())
+            match = Match(players, 50)
+            assert all(
+                action in (C, D) for interaction in match.play()
+                for action in interaction)
