@@ -12,6 +12,7 @@ C, D = Action.C, Action.D
 def test_init():
     for strategy in all_strategies:
         player = Player(strategy)
+        assert player.classifier["stochastic"]
         assert player.original_name == strategy
         assert player.original_function.argtypes == (
             POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int),

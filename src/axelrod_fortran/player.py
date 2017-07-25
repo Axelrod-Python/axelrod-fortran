@@ -12,6 +12,8 @@ original_actions = {C: 0, D: 1}
 
 class Player(axl.Player):
 
+    classifier = {"stochastic": True}
+
     def __init__(self, original_name, game=Game()):
         """
         Parameters
