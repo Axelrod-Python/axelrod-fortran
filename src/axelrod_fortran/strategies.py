@@ -69,3 +69,6 @@ axelrod_python_classes = {
     'ktf2tc', 'TitFor2Tats',
     'ktitfortatc', 'TitForTat',
 }
+
+all_strategies = [key for key in axelrod_python_classes]
+
