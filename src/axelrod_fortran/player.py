@@ -23,6 +23,12 @@ class Player(axl.Player):
         self.original_name = original_name
         self.original_function = self.original_name
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.__original_function = None
+
     @property
     def original_name(self):
         return self.__original_name

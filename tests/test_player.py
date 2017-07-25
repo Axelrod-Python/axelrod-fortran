@@ -26,7 +26,7 @@ def test_matches():
     for strategy in all_strategies:
         for opponent in (Alternator, Cooperator, Defector):
             players = (Player(strategy), opponent())
-            match = Match(players, 50)
+            match = Match(players, 200)
             assert all(
                 action in (C, D) for interaction in match.play()
                 for action in interaction)
