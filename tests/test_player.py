@@ -1,5 +1,5 @@
 from axelrod_fortran.strategies import all_strategies
-from axelrod_fortran.player import Player
+from axelrod_fortran import Player
 from axelrod import Alternator, Cooperator, Defector, Match, Game
 from axelrod.action import Action
 from ctypes import c_int, c_float, POINTER

@@ -1,4 +1,4 @@
-import axelrod.player as axl
+import axelrod as axl
 from axelrod.interaction_utils import compute_final_score
 from axelrod.action import Action
 from axelrod import Game
