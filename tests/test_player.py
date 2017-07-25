@@ -20,6 +20,16 @@ def test_init():
         assert player.original_function.restype == c_int
 
 
+def test_matches():
+    for strategy in all_strategies:
+        for opponent in (Alternator, Cooperator, Defector):
+            players = (Player(strategy), opponent())
+            match = Match(players, 50)
+            assert all(
+                action in (C, D) for interaction in match.play()
+                for action in interaction)
+
+
 @given(
     their_last_move=integers(min_value=0, max_value=1),
     move_number=integers(min_value=1, max_value=200),
@@ -35,13 +45,3 @@ def test_original_strategy(
             their_last_move, move_number, my_score, their_score, 0,
             my_last_move)
         assert action in (0, 1), print(f'{strategy} returned {action}')
-
-
-def test_matches():
-    for strategy in all_strategies:
-        for opponent in (Alternator, Cooperator, Defector):
-            players = (Player(strategy), opponent())
-            match = Match(players, 50)
-            assert all(
-                action in (C, D) for interaction in match.play()
-                for action in interaction)
