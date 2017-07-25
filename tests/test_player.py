@@ -6,9 +6,6 @@ from ctypes import c_int, c_float, POINTER
 
 import itertools
 
-from hypothesis import given
-from hypothesis.strategies import integers
-
 C, D = Action.C, Action.D
 
 
@@ -26,22 +23,57 @@ def test_matches():
     for strategy in all_strategies:
         for opponent in (Alternator, Cooperator, Defector):
             players = (Player(strategy), opponent())
-            match = Match(players, 200)
+            match = Match(players, turns=200)
             assert all(
                 action in (C, D) for interaction in match.play()
                 for action in interaction)
 
+def test_noisy_matches():
+    for strategy in all_strategies:
+        for opponent in (Alternator, Cooperator, Defector):
+            players = (Player(strategy), opponent())
+            match = Match(players, turns=200, noise=0.5)
+            assert all(
+                action in (C, D) for interaction in match.play()
+                for action in interaction)
 
-@given(
-    move_number=integers(min_value=1, max_value=200),
-    my_score=integers(min_value=0, max_value=200),
-    their_score=integers(min_value=0, max_value=200),
-)
-def test_original_strategy(move_number, my_score, their_score):
-    for their_last_move, my_last_move in itertools.product((0, 1), repeat=2):
-        for strategy in all_strategies:
-            with Player(strategy) as player:
-                action = player.original_strategy(
-                    their_last_move, move_number, my_score, their_score, 0,
-                    my_last_move)
-                assert action in (0, 1), print(f'{strategy} returned {action}')
+def test_probend_matches():
+    for strategy in all_strategies:
+        for opponent in (Alternator, Cooperator, Defector):
+            players = (Player(strategy), opponent())
+            match = Match(players, prob_end=0.5, noise=0.5)
+            assert all(
+                action in (C, D) for interaction in match.play()
+                for action in interaction)
+
+def test_original_strategy():
+    """
+    Test original strategy against all possible first 5 moves of a Match
+    """
+    actions_to_scores = {(0, 0): (3, 3), (0, 1): (0, 5),
+                         (1, 0): (5, 0), (1, 1): (1, 1)}
+    for strategy in all_strategies:
+        for opponent_sequence in itertools.product((0, 1), repeat=5):
+
+            player = Player(strategy)
+
+            # Initial set up for empty history
+            my_score, their_score = 0, 0
+            move_number = 1
+            their_previous_action, my_action = 0, 0
+
+            for action in opponent_sequence:
+                my_action = player.original_strategy(
+                    their_last_move=their_previous_action,
+                    move_number=move_number,
+                    my_score=my_score,
+                    their_score=their_score,
+                    noise=0,
+                    my_last_move=my_action)
+
+                assert my_action in [0, 1]
+
+                scores = actions_to_scores[my_action, action]
+                their_previous_action = action
+                my_score += scores[0]
+                their_score += scores[1]
