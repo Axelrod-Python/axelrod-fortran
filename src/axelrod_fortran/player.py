@@ -5,16 +5,8 @@ from ctypes import cdll, c_int, c_float, byref, POINTER
 
 C, D = Action.C, Action.D
 strategies = cdll.LoadLibrary('libstrategies.so')
-
-actions = {
-    0: C,
-    1: D
-}
-
-original_actions = {
-    C: 0,
-    D: 1
-}
+actions = {0: C, 1: D}
+original_actions = {C: 0, D: 1}
 
 
 class Player(axl.Player):
