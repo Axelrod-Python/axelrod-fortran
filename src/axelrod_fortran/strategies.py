@@ -44,7 +44,7 @@ axelrod_python_classes = {
     'k72r': None,
     'k73r': None,
     'k74r': None,
-    # 'k74rxx': None,
+    'k74rxx': None,
     'k75r': None,
     'k76r': 'Tester',
     'k77r': 'Feld',
