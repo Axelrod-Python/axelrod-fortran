@@ -1,6 +1,6 @@
 from axelrod_fortran.strategies import all_strategies
 from axelrod_fortran.player import Player
-from axelrod import Alternator, Cooperator, Defector, Match
+from axelrod import Alternator, Cooperator, Defector, Match, Game
 from axelrod.action import Action
 from ctypes import c_int, c_float, POINTER
 
@@ -45,6 +45,17 @@ def test_probend_matches():
             assert all(
                 action in (C, D) for interaction in match.play()
                 for action in interaction)
+
+def test_matches_with_different_game():
+    for strategy in all_strategies:
+        for opponent in (Alternator, Cooperator, Defector):
+            game = Game(r=4,s=0,p=2,t=6)
+            players = (Player(strategy, game=game), opponent())
+            match = Match(players, turns=200, game=game)
+            assert all(
+                action in (C, D) for interaction in match.play()
+                for action in interaction)
+
 
 def test_original_strategy():
     """
