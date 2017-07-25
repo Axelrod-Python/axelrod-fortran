@@ -34,9 +34,7 @@ def test_original_strategy(
         action = player.original_strategy(
             their_last_move, move_number, my_score, their_score, 0,
             my_last_move)
-        if action not in (0, 1):
-            print(f'{strategy} returned {action}')
-        assert action in (0, 1)
+        assert action in (0, 1), print(f'{strategy} returned {action}')
 
 
 def test_matches():
