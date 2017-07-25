@@ -21,7 +21,7 @@ class Player(axl.Player):
         """
         super().__init__()
         self.original_name = original_name
-        self.original_function = strategies[self.original_name]
+        self.original_function = self.original_name
 
     @property
     def original_name(self):
@@ -38,11 +38,11 @@ class Player(axl.Player):
 
     @original_function.setter
     def original_function(self, value):
-        self.__original_function = value
-        self.original_function.argtypes = (
+        self.__original_function = strategies[(value + '_').lower()]
+        self.__original_function.argtypes = (
             POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int),
             POINTER(c_float))
-        self.original_function.restype = c_int
+        self.__original_function.restype = c_int
 
     def original_strategy(
         self, their_last_move, move_number, my_score, their_score, noise,
@@ -70,4 +70,4 @@ class Player(axl.Player):
 
     def reset(self):
         super().reset()
-        self.original_function = strategies[self.original_name]
+        self.original_function = self.original_name
