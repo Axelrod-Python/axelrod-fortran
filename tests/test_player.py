@@ -8,3 +8,10 @@ def test_init():
         player = Player(strategy)
         assert player.original_name == strategy
         assert player.original_function.restype == c_int
+
+
+def test_strategy():
+    for strategy in all_strategies:
+        player = Player(strategy)
+
+
