@@ -1,6 +1,7 @@
 import axelrod.player as axl
 from axelrod.interaction_utils import compute_final_score
 from axelrod.action import Action
+from axelrod import Game
 from ctypes import cdll, c_int, c_float, byref, POINTER
 
 C, D = Action.C, Action.D
@@ -11,17 +12,20 @@ original_actions = {C: 0, D: 1}
 
 class Player(axl.Player):
 
-    def __init__(self, original_name):
+    def __init__(self, original_name, game=Game()):
         """
         Parameters
         ----------
         original_name: str
             The name of the fortran function from the original axelrod
             tournament
+        game: axelrod.Game
+            A instance of an axelrod Game
         """
         super().__init__()
         self.original_name = original_name
         self.original_function = self.original_name
+        self.game = game
 
     def __enter__(self):
         return self
@@ -66,7 +70,8 @@ class Player(axl.Player):
             my_last_move = 0
         else:
             their_last_move = original_actions[opponent.history[-1]]
-            scores = compute_final_score(zip(self.history, opponent.history))
+            scores = compute_final_score(zip(self.history, opponent.history),
+                                         game=self.game)
             my_last_move = original_actions[self.history[-1]]
         move_number = len(self.history) + 1
         original_action = self.original_strategy(
