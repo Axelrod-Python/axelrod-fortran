@@ -22,10 +22,6 @@ class Player(axl.Player):
         super().__init__()
         self.original_name = original_name
         self.original_function = strategies[self.original_name]
-        self.original_function.argtypes = (
-            POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int),
-            POINTER(c_float))
-        self.original_function.restype = c_int
 
     @property
     def original_name(self):
@@ -35,6 +31,18 @@ class Player(axl.Player):
     def original_name(self, value):
         # TODO Validate the value against list of known fortran functions
         self.__original_name = value
+
+    @property
+    def original_function(self):
+        return self.__original_function
+
+    @original_function.setter
+    def original_function(self, value):
+        self.__original_function = value
+        self.original_function.argtypes = (
+            POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int),
+            POINTER(c_float))
+        self.original_function.restype = c_int
 
     def original_strategy(
         self, their_last_move, move_number, my_score, their_score, noise,
@@ -59,3 +67,7 @@ class Player(axl.Player):
         return self.original_strategy(
             their_last_move, move_number, scores[0], scores[1], noise,
             my_last_move)
+
+    def reset(self):
+        super().reset()
+        self.original_function = strategies[self.original_name]
