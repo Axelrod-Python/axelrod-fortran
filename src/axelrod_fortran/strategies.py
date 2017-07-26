@@ -41,47 +41,47 @@ classifiers = {
         'original_rank': None},
     'k38r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k39r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k40r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': True,
         'author': None,
         'original_rank': None},
     'k41r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k42r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k43r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k44r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': True,
         'author': None,
         'original_rank': None},
     'k45r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k46r': {
         'axelrod-python_class': 'Eatherley',
-        'stochastic': None,
+        'stochastic': True,
         'author': None,
         'original_rank': None},
     'k47r': {
