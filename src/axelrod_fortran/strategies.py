@@ -276,42 +276,42 @@ classifiers = {
         'original_rank': None},
     'k84r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k85r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k86r': {
         'axelrod-python_class': 'Grofman',
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k87r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': True,
         'author': None,
         'original_rank': None},
     'k88r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': True,
         'author': None,
         'original_rank': None},
     'k89r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k90r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k91r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k92r': {
