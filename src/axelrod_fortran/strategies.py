@@ -1,7 +1,7 @@
 classifiers = {
     'grasr': {'axelrod-python class': None, 'stochastic': None},
     'k31r': {'axelrod-python class': None, 'stochastic': None},
-    'k32r': {'axelrod-python class': None, 'stochastic': None},
+    'k32r': {'axelrod-python class': None, 'stochastic': False},
     'k33r': {'axelrod-python class': None, 'stochastic': None},
     'k34r': {'axelrod-python class': 'Grudger', 'stochastic': None},
     'k35r': {'axelrod-python class': None, 'stochastic': None},
@@ -64,10 +64,10 @@ classifiers = {
     'k91r': {'axelrod-python class': None, 'stochastic': None},
     'k92r': {'axelrod-python class': None, 'stochastic': None},
     'k93r': {'axelrod-python class': 'UnnamedStrategy', 'stochastic': None},
-    'kpavlovc': {'axelrod-python class': 'WinStayLoseShift', 'stochastic': None},
-    'krandomc': {'axelrod-python class': 'Random', 'stochastic': None},
-    'ktf2tc': {'axelrod-python class': 'TitFor2Tats', 'stochastic': None},
-    'ktitfortatc': {'axelrod-python class': 'TitForTat', 'stochastic': None},
+    'kpavlovc': {'axelrod-python class': 'WinStayLoseShift', 'stochastic': False},
+    'krandomc': {'axelrod-python class': 'Random', 'stochastic': True},
+    'ktf2tc': {'axelrod-python class': 'TitFor2Tats', 'stochastic': False},
+    'ktitfortatc': {'axelrod-python class': 'TitForTat', 'stochastic': False},
 }
 
 all_strategies = classifiers.keys()
