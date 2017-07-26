@@ -287,7 +287,7 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k86r': {
-        'axelrod-python_class': axl.Grofman,
+        'axelrod-python_class': None,
         'stochastic': False,
         'author': None,
         'original_rank': None},
