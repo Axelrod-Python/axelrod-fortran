@@ -1,4 +1,4 @@
-classifiers = {
+characteristics = {
     'grasr': {
         'axelrod-python_class': None,
         'stochastic': None,
@@ -346,4 +346,4 @@ classifiers = {
         'original_rank': None},
 }
 
-all_strategies = classifiers.keys()
+all_strategies = characteristics.keys()
