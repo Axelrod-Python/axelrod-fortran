@@ -17,7 +17,7 @@ class Player(axl.Player):
 
     classifier = {"stochastic": True}
 
-    def __init__(self, original_name, game=Game()):
+    def __init__(self, original_name):
         """
         Parameters
         ----------
@@ -30,7 +30,6 @@ class Player(axl.Player):
         super().__init__()
         self.original_name = original_name
         self.original_function = self.original_name
-        self.game = game
         is_stochastic = characteristics[self.original_name]['stochastic']
         if is_stochastic is not None:
             self.classifier['stochastic'] = is_stochastic
@@ -79,7 +78,7 @@ class Player(axl.Player):
         else:
             their_last_move = original_actions[opponent.history[-1]]
             scores = compute_final_score(zip(self.history, opponent.history),
-                                         game=self.game)
+                                         game=self.match_attributes["game"])
             my_last_move = original_actions[self.history[-1]]
         move_number = len(self.history) + 1
         random_value = random.random()
