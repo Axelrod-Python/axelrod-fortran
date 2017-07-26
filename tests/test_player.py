@@ -15,39 +15,39 @@ class TestAll(unittest.TestCase):
     def test_init(self):
         for strategy in all_strategies:
             player = Player(strategy)
-            assert player.classifier["stochastic"]
-            assert player.original_name == strategy
-            assert player.original_function.argtypes == (
+            self.assertTrue(player.classifier["stochastic"])
+            self.assertEqual(player.original_name, strategy)
+            self.assertEqual(player.original_function.argtypes, (
                 POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int),
-                POINTER(c_float))
-            assert player.original_function.restype == c_int
+                POINTER(c_float)))
+            self.assertEqual(player.original_function.restype, c_int)
 
     def test_matches(self):
         for strategy in all_strategies:
             for opponent in (Alternator, Cooperator, Defector):
                 players = (Player(strategy), opponent())
                 match = Match(players, turns=200)
-                assert all(
+                self.assertTrue(all(
                     action in (C, D) for interaction in match.play()
-                    for action in interaction)
+                    for action in interaction))
 
     def test_noisy_matches(self):
         for strategy in all_strategies:
             for opponent in (Alternator, Cooperator, Defector):
                 players = (Player(strategy), opponent())
                 match = Match(players, turns=200, noise=0.5)
-                assert all(
+                self.assertTrue(all(
                     action in (C, D) for interaction in match.play()
-                    for action in interaction)
+                    for action in interaction))
 
     def test_probend_matches(self):
         for strategy in all_strategies:
             for opponent in (Alternator, Cooperator, Defector):
                 players = (Player(strategy), opponent())
                 match = Match(players, prob_end=0.5)
-                assert all(
+                self.assertTrue(all(
                     action in (C, D) for interaction in match.play()
-                    for action in interaction)
+                    for action in interaction))
 
     def test_matches_with_different_game(self):
         for strategy in all_strategies:
@@ -55,16 +55,16 @@ class TestAll(unittest.TestCase):
                 game = Game(r=4,s=0,p=2,t=6)
                 players = (Player(strategy, game=game), opponent())
                 match = Match(players, turns=200, game=game)
-                assert all(
+                self.assertTrue(all(
                     action in (C, D) for interaction in match.play()
-                    for action in interaction)
+                    for action in interaction))
 
     def test_random(self):
         random.seed(10)
         players = (Player("KRANDOMC"), Player("KRANDOMC"))
         match = Match(players, 5)
         expected = [(C, D), (C, D), (C, C), (C, D), (C, D)]
-        assert match.play() == expected
+        self.assertEqual(match.play(), expected)
 
     def test_original_strategy(self):
         """
@@ -91,7 +91,7 @@ class TestAll(unittest.TestCase):
                         random_value=0,
                         my_last_move=my_action)
 
-                    assert my_action in [0, 1]
+                    self.assertTrue(my_action in [0, 1])
 
                     scores = actions_to_scores[my_action, action]
                     their_previous_action = action

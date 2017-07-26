@@ -12,16 +12,16 @@ class TestAll(unittest.TestCase):
         players = (Player('ktitfortatc'), axl.Alternator())
         match = axl.Match(players, 5)
         expected = [(C, C), (C, D), (D, C), (C, D), (D, C)]
-        assert match.play() == expected
+        self.assertEqual(match.play(), expected)
 
     def test_versus_cooperator(self):
         players = (Player('ktitfortatc'), axl.Cooperator())
         match = axl.Match(players, 5)
         expected = [(C, C), (C, C), (C, C), (C, C), (C, C)]
-        assert match.play() == expected
+        self.assertEqual(match.play(), expected)
 
     def test_versus_defector(self):
         players = (Player('ktitfortatc'), axl.Defector())
         match = axl.Match(players, 5)
         expected = [(C, D), (D, D), (D, D), (D, D), (D, D)]
-        assert match.play() == expected
+        self.assertEqual(match.play(), expected)
