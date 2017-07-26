@@ -5,6 +5,7 @@ from axelrod.interaction_utils import compute_final_score
 from axelrod.action import Action
 from axelrod import Game
 from ctypes import cdll, c_int, c_float, byref, POINTER
+from .strategies import classifiers
 
 C, D = Action.C, Action.D
 strategies = cdll.LoadLibrary('libstrategies.so')
@@ -30,6 +31,9 @@ class Player(axl.Player):
         self.original_name = original_name
         self.original_function = self.original_name
         self.game = game
+        is_stochastic = classifiers[self.original_name]['stochastic']
+        if is_stochastic is not None:
+            self.classifier['stochastic'] = is_stochastic
 
     def __enter__(self):
         return self
