@@ -20,6 +20,10 @@ To set up `axelrod-fortran` for local development:
 
     python setup.py develop
 
+   For this to work you also need the original Fortan code installed.
+   Instructions for this are available:
+   https://github.com/Axelrod-Python/TourExec
+
 5. To run tests, `py.test` is used as a test runner::
 
     pip install pytest
