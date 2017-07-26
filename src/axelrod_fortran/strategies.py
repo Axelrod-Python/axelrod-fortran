@@ -131,47 +131,47 @@ classifiers = {
         'original_rank': None},
     'k56r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k57r': {
         'axelrod-python_class': 'Nydegger',
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k58r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k59r': {
         'axelrod-python_class': 'RevisedDowning',
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k60r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k61r': {
         'axelrod-python_class': 'Champion',
-        'stochastic': None,
+        'stochastic': True,
         'author': None,
         'original_rank': None},
     'k62r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': True,
         'author': None,
         'original_rank': None},
     'k63r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k64r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k65r': {
