@@ -1,6 +1,7 @@
 from axelrod_fortran.strategies import characteristics, all_strategies
 from axelrod_fortran import Player
-from axelrod import Alternator, Cooperator, Defector, Match, Game
+from axelrod import (Alternator, Cooperator, Defector,
+                     Match, Game, basic_strategies)
 from axelrod.action import Action
 from ctypes import c_int, c_float, POINTER
 
@@ -93,3 +94,17 @@ def test_original_strategy():
                 their_previous_action = action
                 my_score += scores[0]
                 their_score += scores[1]
+
+def test_deterministic_strategies():
+    """
+    Test that the strategies classified as deterministic indeed act
+    deterministically.
+    """
+    for strategy in all_strategies:
+        player = Player(strategy)
+        if player.classifier["stochastic"] is False:
+            for opponent in basic_strategies:
+                match = Match((player, opponent()))
+                interactions = match.play()
+                for _ in range(2):  # Repeat 3 matches
+                    assert interactions == match.play(), player
