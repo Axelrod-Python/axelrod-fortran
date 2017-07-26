@@ -226,52 +226,52 @@ classifiers = {
         'original_rank': None},
     'k74rxx': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k75r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': True,
         'author': None,
         'original_rank': None},
     'k76r': {
         'axelrod-python_class': 'Tester',
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k77r': {
         'axelrod-python_class': 'Feld',
-        'stochastic': None,
+        'stochastic': True,
         'author': None,
         'original_rank': None},
     'k78r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': True,
         'author': None,
         'original_rank': None},
     'k79r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k80r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k81r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k82r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': True,
         'author': None,
         'original_rank': None},
     'k83r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': True,
         'author': None,
         'original_rank': None},
     'k84r': {
