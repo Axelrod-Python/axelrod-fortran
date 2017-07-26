@@ -1,42 +1,42 @@
 classifiers = {
     'grasr': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': True,
         'author': None,
         'original_rank': None},
     'k31r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k32r': {
         'axelrod-python_class': None,
-        'stochastic': False,
+        'stochastic': True,
         'author': None,
         'original_rank': None},
     'k33r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k34r': {
         'axelrod-python_class': 'Grudger',
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k35r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': True,
         'author': None,
         'original_rank': None},
     'k36r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': True,
         'author': None,
         'original_rank': None},
     'k37r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k38r': {
