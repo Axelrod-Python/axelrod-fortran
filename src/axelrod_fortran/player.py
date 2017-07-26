@@ -83,7 +83,10 @@ class Player(axl.Player):
                                          game=self.match_attributes["game"])
             my_last_move = original_actions[self.history[-1]]
         move_number = len(self.history) + 1
-        random_value = random.random()
+        if self.classifier["stochastic"]:
+            random_value = random.random()
+        else:
+            random_value = 0
         original_action = self.original_strategy(
             their_last_move, move_number, scores[0], scores[1], random_value,
             my_last_move)

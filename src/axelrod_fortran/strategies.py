@@ -1,3 +1,5 @@
+import axelrod as axl
+
 characteristics = {
     'grasr': {
         'axelrod-python_class': None,
@@ -20,7 +22,7 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k34r': {
-        'axelrod-python_class': 'Grudger',
+        'axelrod-python_class': axl.Grudger,
         'stochastic': False,
         'author': None,
         'original_rank': None},
@@ -80,7 +82,7 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k46r': {
-        'axelrod-python_class': 'Eatherley',
+        'axelrod-python_class': axl.Eatherley,
         'stochastic': True,
         'author': None,
         'original_rank': None},
@@ -135,7 +137,7 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k57r': {
-        'axelrod-python_class': 'Nydegger',
+        'axelrod-python_class': axl.Nydegger,
         'stochastic': False,
         'author': None,
         'original_rank': None},
@@ -145,7 +147,7 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k59r': {
-        'axelrod-python_class': 'RevisedDowning',
+        'axelrod-python_class': axl.RevisedDowning,
         'stochastic': False,
         'author': None,
         'original_rank': None},
@@ -155,7 +157,7 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k61r': {
-        'axelrod-python_class': 'Champion',
+        'axelrod-python_class': axl.Champion,
         'stochastic': True,
         'author': None,
         'original_rank': None},
@@ -195,7 +197,7 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k69r': {
-        'axelrod-python_class': 'Joss',
+        'axelrod-python_class': axl.Joss,
         'stochastic': True,
         'author': None,
         'original_rank': None},
@@ -235,12 +237,12 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k76r': {
-        'axelrod-python_class': 'Tester',
+        'axelrod-python_class': axl.Tester,
         'stochastic': False,
         'author': None,
         'original_rank': None},
     'k77r': {
-        'axelrod-python_class': 'Feld',
+        'axelrod-python_class': axl.Feld,
         'stochastic': True,
         'author': None,
         'original_rank': None},
@@ -285,7 +287,7 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k86r': {
-        'axelrod-python_class': 'Grofman',
+        'axelrod-python_class': axl.Grofman,
         'stochastic': False,
         'author': None,
         'original_rank': None},
@@ -320,27 +322,27 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k93r': {
-        'axelrod-python_class': 'UnnamedStrategy',
+        'axelrod-python_class': axl.UnnamedStrategy,
         'stochastic': True,
         'author': None,
         'original_rank': None},
     'kpavlovc': {
-        'axelrod-python_class': 'WinStayLoseShift',
+        'axelrod-python_class': axl.WinStayLoseShift,
         'stochastic': False,
         'author': None,
         'original_rank': None},
     'krandomc': {
-        'axelrod-python_class': 'Random',
+        'axelrod-python_class': axl.Random,
         'stochastic': True,
         'author': None,
         'original_rank': None},
     'ktf2tc': {
-        'axelrod-python_class': 'TitFor2Tats',
+        'axelrod-python_class': axl.TitFor2Tats,
         'stochastic': False,
         'author': None,
         'original_rank': None},
     'ktitfortatc': {
-        'axelrod-python_class': 'TitForTat',
+        'axelrod-python_class': axl.TitForTat,
         'stochastic': False,
         'author': None,
         'original_rank': None},
