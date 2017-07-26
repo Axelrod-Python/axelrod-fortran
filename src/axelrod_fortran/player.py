@@ -46,8 +46,10 @@ class Player(axl.Player):
 
     @original_name.setter
     def original_name(self, value):
-        # TODO Validate the value against list of known fortran functions
-        self.__original_name = value
+        if value in characteristics:
+            self.__original_name = value
+        else:
+            raise ValueError(f'{value} is not a valid Fortran function')
 
     @property
     def original_function(self):
