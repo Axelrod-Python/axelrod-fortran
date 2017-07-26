@@ -1,4 +1,4 @@
-from axelrod_fortran.strategies import all_strategies
+from axelrod_fortran.strategies import characteristics, all_strategies
 from axelrod_fortran import Player
 from axelrod import Alternator, Cooperator, Defector, Match, Game
 from axelrod.action import Action
@@ -12,7 +12,8 @@ C, D = Action.C, Action.D
 def test_init():
     for strategy in all_strategies:
         player = Player(strategy)
-        assert player.classifier["stochastic"]
+        is_stochastic = characteristics[strategy]['stochastic'] in (True, None)
+        assert player.classifier['stochastic'] == is_stochastic
         assert player.original_name == strategy
         assert player.original_function.argtypes == (
             POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int),
