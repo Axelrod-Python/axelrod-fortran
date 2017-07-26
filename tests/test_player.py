@@ -6,6 +6,7 @@ from axelrod.action import Action
 from ctypes import c_int, c_float, POINTER
 
 import itertools
+import pytest
 
 C, D = Action.C, Action.D
 
@@ -20,6 +21,8 @@ def test_init():
             POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int),
             POINTER(c_float))
         assert player.original_function.restype == c_int
+        with pytest.raises(ValueError):
+            player = Player('test')
 
 
 def test_matches():
