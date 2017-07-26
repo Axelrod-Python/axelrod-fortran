@@ -12,11 +12,8 @@ C, D = Action.C, Action.D
 def test_init():
     for strategy in all_strategies:
         player = Player(strategy)
-        is_stochastic = classifiers[strategy]['stochastic']
-        if is_stochastic is not None and not is_stochastic:
-            assert not player.classifier['stochastic']
-        else:
-            assert player.classifier['stochastic']
+        is_stochastic = classifiers[strategy]['stochastic'] in (True, None)
+        assert player.classifier['stochastic'] == is_stochastic
         assert player.original_name == strategy
         assert player.original_function.argtypes == (
             POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int),
