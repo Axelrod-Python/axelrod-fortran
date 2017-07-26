@@ -1,7 +1,7 @@
 from axelrod_fortran.strategies import characteristics, all_strategies
 from axelrod_fortran import Player
 from axelrod import (Alternator, Cooperator, Defector,
-                     Match, Game, basic_strategies)
+                     Match, Game, basic_strategies, seed)
 from axelrod.action import Action
 from ctypes import c_int, c_float, POINTER
 
@@ -111,3 +111,24 @@ def test_deterministic_strategies():
                 interactions = match.play()
                 for _ in range(2):  # Repeat 3 matches
                     assert interactions == match.play(), player
+
+
+def test_implemented_strategies():
+    """
+    Test that the deterministic strategies that are implemented in Axelrod
+    give the same outcomes.
+    """
+    known_failures = ["k57r", "k59r", "k86r"]
+    for strategy, dictionary in characteristics.items():
+        axelrod_class = dictionary["axelrod-python_class"]
+        player = Player(strategy)
+        if (axelrod_class is not None and
+            strategy not in known_failures and
+            player.classifier["stochastic"] is False):
+            axl_player = axelrod_class()
+            for opponent_strategy in basic_strategies:
+                opponent = opponent_strategy()
+                match = Match((player, opponent))
+                interactions = match.play()
+                axl_match = Match((axl_player, opponent))
+                assert interactions == axl_match.play(), (player, opponent)
