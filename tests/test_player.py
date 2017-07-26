@@ -29,6 +29,7 @@ def test_matches():
                 action in (C, D) for interaction in match.play()
                 for action in interaction)
 
+
 def test_noisy_matches():
     for strategy in all_strategies:
         for opponent in (Alternator, Cooperator, Defector):
@@ -37,6 +38,7 @@ def test_noisy_matches():
             assert all(
                 action in (C, D) for interaction in match.play()
                 for action in interaction)
+
 
 def test_probend_matches():
     for strategy in all_strategies:
@@ -47,10 +49,11 @@ def test_probend_matches():
                 action in (C, D) for interaction in match.play()
                 for action in interaction)
 
+
 def test_matches_with_different_game():
     for strategy in all_strategies:
         for opponent in (Alternator, Cooperator, Defector):
-            game = Game(r=4,s=0,p=2,t=6)
+            game = Game(r=4, s=0, p=2, t=6)
             players = (Player(strategy, game=game), opponent())
             match = Match(players, turns=200, game=game)
             assert all(
@@ -80,7 +83,7 @@ def test_original_strategy():
                     move_number=move_number,
                     my_score=my_score,
                     their_score=their_score,
-                    noise=0,
+                    random_value=0,
                     my_last_move=my_action)
 
                 assert my_action in [0, 1]
