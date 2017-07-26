@@ -316,12 +316,12 @@ classifiers = {
         'original_rank': None},
     'k92r': {
         'axelrod-python_class': None,
-        'stochastic': None,
+        'stochastic': False,
         'author': None,
         'original_rank': None},
     'k93r': {
         'axelrod-python_class': 'UnnamedStrategy',
-        'stochastic': None,
+        'stochastic': True,
         'author': None,
         'original_rank': None},
     'kpavlovc': {
