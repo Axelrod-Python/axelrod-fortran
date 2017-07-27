@@ -82,7 +82,7 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k46r': {
-        'axelrod-python_class': axl.Eatherley,
+        'axelrod-python_class': None,
         'stochastic': True,
         'author': None,
         'original_rank': None},
@@ -137,7 +137,7 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k57r': {
-        'axelrod-python_class': axl.Nydegger,
+        'axelrod-python_class': None,
         'stochastic': False,
         'author': None,
         'original_rank': None},
@@ -147,7 +147,7 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k59r': {
-        'axelrod-python_class': axl.RevisedDowning,
+        'axelrod-python_class': None,
         'stochastic': False,
         'author': None,
         'original_rank': None},
@@ -157,7 +157,7 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k61r': {
-        'axelrod-python_class': axl.Champion,
+        'axelrod-python_class': None,
         'stochastic': True,
         'author': None,
         'original_rank': None},
@@ -197,7 +197,7 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k69r': {
-        'axelrod-python_class': axl.Joss,
+        'axelrod-python_class': None,
         'stochastic': True,
         'author': None,
         'original_rank': None},
@@ -237,12 +237,12 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k76r': {
-        'axelrod-python_class': axl.Tester,
+        'axelrod-python_class': None,
         'stochastic': False,
         'author': None,
         'original_rank': None},
     'k77r': {
-        'axelrod-python_class': axl.Feld,
+        'axelrod-python_class': None,
         'stochastic': True,
         'author': None,
         'original_rank': None},
@@ -322,7 +322,7 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k93r': {
-        'axelrod-python_class': axl.UnnamedStrategy,
+        'axelrod-python_class': None,
         'stochastic': True,
         'author': None,
         'original_rank': None},

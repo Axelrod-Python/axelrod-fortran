@@ -118,12 +118,10 @@ def test_implemented_strategies():
     Test that the deterministic strategies that are implemented in Axelrod
     give the same outcomes.
     """
-    known_failures = ["k57r", "k59r", "k86r"]
     for strategy, dictionary in characteristics.items():
         axelrod_class = dictionary["axelrod-python_class"]
         player = Player(strategy)
         if (axelrod_class is not None and
-            strategy not in known_failures and
             player.classifier["stochastic"] is False):
             axl_player = axelrod_class()
             for opponent_strategy in basic_strategies:
