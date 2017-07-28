@@ -15,6 +15,19 @@ Installation
     pip install axelrod-fortran
 
 
+Usage
+=====
+
+::
+
+    >>> import axelrod_fortran as axlf
+    >>> import axelrod as axl
+    >>> p1 = axlf.Player('k31r')
+    >>> p2 = axlf.Player('k33r')
+    >>> match = axl.Match((p1, p2), turns=5)
+    >>> match.play()
+    [(C, C), (C, C), (C, D), (C, D), (C, C)]
+
 Contributing
 ============
 
