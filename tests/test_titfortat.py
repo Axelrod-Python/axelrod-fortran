@@ -1,4 +1,4 @@
-from axelrod_fortran.player import Player
+from axelrod_fortran import Player
 import axelrod as axl
 from axelrod.action import Action
 

@@ -1,5 +1,4 @@
-from axelrod_fortran.strategies import characteristics, all_strategies
-from axelrod_fortran import Player
+from axelrod_fortran import Player, characteristics, all_strategies
 from axelrod import (Alternator, Cooperator, Defector,
                      Match, Game, basic_strategies, seed)
 from axelrod.action import Action
