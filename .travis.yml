@@ -9,7 +9,7 @@ before_install:
   - sudo apt-get install gfortran
   - git clone https://github.com/Axelrod-Python/TourExec.git /tmp/TourExec
   - cd /tmp/TourExec
-  - make install
+  - sudo make install
 install:
   - pip install -r requirements.txt
   - pip install pytest
