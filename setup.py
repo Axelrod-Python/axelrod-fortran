@@ -58,13 +58,4 @@ setup(
         'axelrod == 3.1.2',
     ],
     python_requires=">=3.6",
-    ext_modules=[
-        Extension(
-            splitext(relpath(path, 'src').replace(os.sep, '.'))[0],
-            sources=[path],
-            include_dirs=[dirname(path)]
-        )
-        for root, _, _ in os.walk('src')
-        for path in glob(join(root, '*.c'))
-    ],
 )
