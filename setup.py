@@ -40,9 +40,9 @@ setup(
         re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
         re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
     ),
-    author='Owen Campbell',
-    author_email='owen.campbell@tanti.org.uk',
-    url='https://github.com/meatballs/axelrod-fortran',
+    author='Owen Campbell, Vincent Knight, Marc Harper',
+    author_email=('axelrod-python@googlegroups.com'),
+    url='https://github.com/axelrod-python/axelrod-fortran',
     packages=find_packages('src'),
     package_dir={'': 'src'},
     py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
