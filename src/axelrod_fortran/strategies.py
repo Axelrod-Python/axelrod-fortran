@@ -225,7 +225,7 @@ characteristics = {
         'axelrod-python_class': None,
         'stochastic': False,
         'author': 'Edward Friedland',
-        'original_rank': None},
+        'original_rank': 61},
     'k74rxx': {
         'axelrod-python_class': None,
         'stochastic': False,
