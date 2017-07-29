@@ -30,24 +30,22 @@ Running a match:
    >>> match.play()
    [(C, C), (C, C), (C, D), (C, D), (C, C)]
 
-Reproducing Axelrod's second tournament:
+Running an instance of Axelrod's second tournament:
 
 .. code-block:: python
 
-   import axelrod as axl
-   from axelrod_fortran.strategies import characteristics
-   from axelrod_fortran.player import Player
+   >>> import axelrod_fortran as axlf
+   >>> import axelrod as axl
+   >>> players = [axlf.Player(name) for name in axlf.characteristics.keys()
+   >>>            if axlf.characteristics[name]["original_rank"] is not None]
+   >>> print(len(players), "players")
+   62 players
+   >>> tournament = axl.Tournament(players, repetitions=1, turns=200)
+   >>> results = tournament.play()
+   >>> results.write_summary('summary.csv')
+   >>> plot = axl.Plot(results)
+   >>> plot.save_all_plots("second_tournament")
 
-   players = [Player(name) for name in characteristics.keys()
-              if characteristics[name]["original_rank"] is not None]
-
-   print(len(players), "players")
-
-   tournament = axl.Tournament(players, repetitions=100)
-   results = tournament.play(processes=4)
-   results.write_summary('summary.csv')
-   plot = axl.Plot(results)
-   plot.save_all_plots("second_tournament")
 
 Contributing
 ============
