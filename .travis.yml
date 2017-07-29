@@ -8,6 +8,7 @@ before_install:
 install:
   - pip install -r requirements.txt
   - pip install pytest
+  - apt get install gfortran
   - git clone https://github.com/Axelrod-Python/TourExec.git /tmp/TourExec
   - cd /tmp/TourExec
   - make install
