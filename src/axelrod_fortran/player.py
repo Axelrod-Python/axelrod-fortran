@@ -3,7 +3,6 @@ import random
 import axelrod as axl
 from axelrod.interaction_utils import compute_final_score
 from axelrod.action import Action
-from axelrod import Game
 from ctypes import cdll, c_int, c_float, byref, POINTER
 from .strategies import characteristics
 
@@ -49,7 +48,7 @@ class Player(axl.Player):
         if value in characteristics:
             self.__original_name = value
         else:
-            raise ValueError(f'{value} is not a valid Fortran function')
+            raise ValueError('{} is not a valid Fortran function'.format(value))
 
     @property
     def original_function(self):

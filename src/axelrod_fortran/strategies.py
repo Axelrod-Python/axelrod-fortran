@@ -349,3 +349,8 @@ characteristics = {
 }
 
 all_strategies = characteristics.keys()
+
+# Players from Axelrod's second tournament.
+second_tournament_strategies = [
+    name for name in characteristics.keys()
+    if characteristics[name]["original_rank"] is not None]
