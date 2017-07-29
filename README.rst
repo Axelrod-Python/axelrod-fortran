@@ -36,8 +36,7 @@ Running an instance of Axelrod's second tournament:
 
    >>> import axelrod_fortran as axlf
    >>> import axelrod as axl
-   >>> players = [axlf.Player(name) for name in axlf.characteristics.keys()
-   >>>            if axlf.characteristics[name]["original_rank"] is not None]
+   >>> players = [axlf.Player(name) for name in axlf.second_tournament_strategies]
    >>> print(len(players), "players")
    62 players
    >>> tournament = axl.Tournament(players, repetitions=1, turns=200)
