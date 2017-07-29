@@ -56,5 +56,5 @@ setup(
     install_requires=[
         'axelrod == 3.1.2',
     ],
-    python_requires=">=3.6",
+    python_requires=">=3.5",
 )
