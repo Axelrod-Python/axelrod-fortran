@@ -66,11 +66,7 @@ setup(
     install_requires=[
         'axelrod == 3.1.2',
     ],
-    extras_require={
-        # eg:
-        #   'rst': ['docutils>=0.11'],
-        #   ':python_version=="2.6"': ['argparse'],
-    },
+    python_requires=">=3.6",
     ext_modules=[
         Extension(
             splitext(relpath(path, 'src').replace(os.sep, '.'))[0],
