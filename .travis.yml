@@ -1,0 +1,19 @@
+language: python
+python:
+  - 3.5
+  - 3.6
+before_install:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - sudo apt-get -qq update
+  - sudo apt-get install gfortran
+  - git clone https://github.com/Axelrod-Python/TourExec.git /tmp/TourExec
+  - cd /tmp/TourExec
+  - sudo make install
+  - export LD_LIBRARY_PATH=/usr/local/lib
+  - cd $TRAVIS_BUILD_DIR
+install:
+  - pip install -r requirements.txt
+  - pip install pytest
+script:
+    - pytest
