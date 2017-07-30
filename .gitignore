@@ -67,3 +67,7 @@ docs/_build
 
 *.sublime-project
 *.sublime-workspace
+
+# Test outputs
+second_tournament*.svg
+summary.csv
