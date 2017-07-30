@@ -39,7 +39,8 @@ Running an instance of Axelrod's second tournament:
    >>> players = [axlf.Player(name) for name in axlf.second_tournament_strategies]
    >>> print(len(players), "players")
    63 players
-   >>> tournament = axl.Tournament(players, repetitions=1, turns=200)
+   >>> tournament = axl.Tournament(players, repetitions=1,
+   ...                             turns=63, match_attributes={"length": -1})
    >>> results = tournament.play()
    >>> results.write_summary('summary.csv')
    >>> plot = axl.Plot(results)
