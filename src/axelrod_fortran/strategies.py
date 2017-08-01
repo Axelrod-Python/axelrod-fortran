@@ -354,3 +354,5 @@ all_strategies = characteristics.keys()
 second_tournament_strategies = [
     name for name in characteristics.keys()
     if characteristics[name]["original_rank"] is not None]
+
+representative_strategies = ['k60r', 'k91r', 'k40r', 'k76r', 'k67r']
