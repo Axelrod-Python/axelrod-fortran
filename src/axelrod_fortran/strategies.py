@@ -317,7 +317,7 @@ characteristics = {
         'author': 'Jonathan Pinkley',
         'original_rank': 30},
     'k92r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.TitForTat,
         'stochastic': False,
         'author': 'Anatol Rapoport',
         'original_rank': 1},
