@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.3.1 (2017-08-04)
+-------------------
+
+* Identify strategy K61R as Champion by Danny Champion ranked at 2.
+
 v0.3.0 (2017-08-04)
 -------------------
 
