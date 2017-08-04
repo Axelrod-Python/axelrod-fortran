@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.3.0 (2017-08-04)
+-------------------
+
+* Identify strategy K92R as Tit For Tat by Anatol Rapoport ranked at 1.
+
 v0.2.0 (2017-07-30)
 -------------------
 
