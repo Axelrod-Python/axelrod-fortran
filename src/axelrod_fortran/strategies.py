@@ -157,7 +157,7 @@ characteristics = {
         'author': 'Jim Graaskamp and Ken Katzen',
         'original_rank': 6},
     'k61r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.Champion,
         'stochastic': True,
         'author': 'Danny C Champion',
         'original_rank': 2},
