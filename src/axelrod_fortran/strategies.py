@@ -237,7 +237,7 @@ characteristics = {
         'author': 'Paul D Harrington',
         'original_rank': 8},
     'k76r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.Gladstein,
         'stochastic': False,
         'author': 'David Gladstein',
         'original_rank': 46},
