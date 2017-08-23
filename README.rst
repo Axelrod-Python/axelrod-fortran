@@ -3,12 +3,15 @@ Overview
 ========
 
 
-Python wrapper for strategies originally written in Fortran
+Python wrapper for strategies originally written in Fortran.
 
 * Free software: MIT license
 
 Installation
 ============
+
+To use this library the original Fortran code must be compiled:
+https://github.com/Axelrod-Python/TourExec.
 
 ::
 
