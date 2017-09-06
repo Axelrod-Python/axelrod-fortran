@@ -187,7 +187,7 @@ characteristics = {
         'author': 'Ray Mikkelson',
         'original_rank': 20},
     'k67r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.Tranquilizer,
         'stochastic': True,
         'author': 'Craig Feathers',
         'original_rank': 27},

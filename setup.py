@@ -54,7 +54,7 @@ setup(
         'Topic :: Utilities',
     ],
     install_requires=[
-        'axelrod >= 3.4.0',
+        'axelrod >= 3.7.0',
     ],
     python_requires=">=3.5",
 )
