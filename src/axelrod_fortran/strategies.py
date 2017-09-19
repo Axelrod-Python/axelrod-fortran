@@ -157,7 +157,7 @@ characteristics = {
         'author': 'Jim Graaskamp and Ken Katzen',
         'original_rank': 6},
     'k61r': {
-        'axelrod-python_class': axl.Champion,
+        'axelrod-python_class': None,
         'stochastic': True,
         'author': 'Danny C Champion',
         'original_rank': 2},
@@ -307,7 +307,7 @@ characteristics = {
         'author': 'Gene Snodgrass',
         'original_rank': 56},
     'k90r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.TitFor2Tats,
         'stochastic': False,
         'author': 'John Maynard Smith',
         'original_rank': 24},
