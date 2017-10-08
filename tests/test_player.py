@@ -129,3 +129,19 @@ def test_implemented_strategies():
                 interactions = match.play()
                 axl_match = Match((axl_player, opponent))
                 assert interactions == axl_match.play(), (player, opponent)
+
+def test_champion_v_alternator():
+    """
+    Specific regression test for a bug.
+    """
+    player = Player("k61r")
+    opponent = Alternator()
+
+    match = Match((player, opponent))
+
+    seed(0)
+    interactions = match.play()
+    assert interactions[25:30] == [(C, D), (C, C), (C, D), (D, C), (C, D)]
+
+    seed(0)
+    assert interactions == match.play()
