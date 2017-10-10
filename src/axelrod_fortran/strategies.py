@@ -287,7 +287,7 @@ characteristics = {
         'author': 'Robert B Falk and James M Langsted',
         'original_rank': 33},
     'k86r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.MoreGrofman,
         'stochastic': False,
         'author': 'Bernard Grofman',
         'original_rank': 28},
