@@ -1,6 +1,17 @@
 Changelog
 =========
 
+v0.3.2 (2017-10-13)
+-------------------
+
+* Tag K76R as implemented by axl.Gladstein
+* Tag K67R as implemented by axl.Tranquilizer
+* Tag K90R as implemented by axl.TitFor2Tats
+* Tag K86R as implemented by axl.MoreGrofman
+* Remove Tag showing K61R as implemented by axl.Champion
+
+* Add test for Champion (K61R)
+
 v0.3.1 (2017-08-04)
 -------------------
 
