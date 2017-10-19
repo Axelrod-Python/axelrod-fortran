@@ -82,7 +82,8 @@ class Player(axl.Player):
             message = """
 You are playing a match with two copies of the same player.
 However the axelrod fortran players share memory.
-You can initialise an instance of an Axelrod_fortran player with a `strategies`
+You can initialise an instance of an Axelrod_fortran player with a
+`shared_library_name`
 variable that points to a copy of the shared library."""
             warnings.warn(message=message)
 
