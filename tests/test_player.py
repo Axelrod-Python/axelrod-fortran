@@ -2,7 +2,7 @@ from axelrod_fortran import Player, characteristics, all_strategies
 from axelrod import (Alternator, Cooperator, Defector,
                      Match, Game, basic_strategies, seed)
 from axelrod.action import Action
-from ctypes import c_int, c_float, POINTER
+from ctypes import c_int, c_float, POINTER, CDLL
 
 import itertools
 import pytest
@@ -22,6 +22,15 @@ def test_init():
         assert player.original_function.restype == c_int
         with pytest.raises(ValueError):
             player = Player('test')
+        assert "libstrategies.so" == player.shared_library_name
+        assert type(player.shared_library) is CDLL
+        assert "libstrategies.so" in str(player.shared_library)
+
+def test_init_with_shared():
+    player = Player("k42r", shared_library_name="libstrategies.so")
+    assert "libstrategies.so" == player.shared_library_name
+    assert type(player.shared_library) is CDLL
+    assert "libstrategies.so" in str(player.shared_library)
 
 
 def test_matches():
@@ -145,3 +154,29 @@ def test_champion_v_alternator():
 
     seed(0)
     assert interactions == match.play()
+
+def test_warning_for_self_interaction(recwarn):
+    """
+    Test that a warning is given for a self interaction.
+    """
+    player = Player("k42r")
+    opponent = Player("k42r")
+
+    match = Match((player, opponent))
+
+    interactions = match.play()
+    assert len(recwarn) == 1
+
+def test_no_warning_for_normal_interaction(recwarn):
+    """
+    Test that a warning is not given for a normal interaction
+    """
+    player = Player("k42r")
+    opponent = Alternator()
+    for players in [(Player("k42r"), Alternator()),
+                    (Player("k42r"), Player("k41r"))]:
+
+        match = Match(players)
+
+        interactions = match.play()
+        assert len(recwarn) == 0

@@ -1,4 +1,5 @@
 import random
+import warnings
 
 import axelrod as axl
 from axelrod.interaction_utils import compute_final_score
@@ -7,7 +8,6 @@ from ctypes import cdll, c_int, c_float, byref, POINTER
 from .strategies import characteristics
 
 C, D = Action.C, Action.D
-strategies = cdll.LoadLibrary('libstrategies.so')
 actions = {0: C, 1: D}
 original_actions = {C: 0, D: 1}
 
@@ -16,7 +16,8 @@ class Player(axl.Player):
 
     classifier = {"stochastic": True}
 
-    def __init__(self, original_name):
+    def __init__(self, original_name,
+                 shared_library_name='libstrategies.so'):
         """
         Parameters
         ----------
@@ -27,6 +28,8 @@ class Player(axl.Player):
             A instance of an axelrod Game
         """
         super().__init__()
+        self.shared_library_name = shared_library_name
+        self.shared_library = cdll.LoadLibrary(shared_library_name)
         self.original_name = original_name
         self.original_function = self.original_name
         is_stochastic = characteristics[self.original_name]['stochastic']
@@ -56,7 +59,7 @@ class Player(axl.Player):
 
     @original_function.setter
     def original_function(self, value):
-        self.__original_function = strategies[(value + '_').lower()]
+        self.__original_function = self.shared_library[(value + '_').lower()]
         self.__original_function.argtypes = (
             POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int),
             POINTER(c_float))
@@ -72,6 +75,17 @@ class Player(axl.Player):
         return self.original_function(*[byref(arg) for arg in args])
 
     def strategy(self, opponent):
+        if type(opponent) is Player\
+           and (opponent.original_name == self.original_name) \
+           and (opponent.shared_library_name == self.shared_library_name):
+
+            message = """
+You are playing a match with two copies of the same player.
+However the axelrod fortran players share memory.
+You can initialise an instance of an Axelrod_fortran player with a `strategies`
+variable that points to a copy of the shared library."""
+            warnings.warn(message=message)
+
         if not self.history:
             their_last_move = 0
             scores = (0, 0)
