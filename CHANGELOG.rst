@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.4.0 (2017-10-20)
+-------------------
+
+* Add ability to pass name of shared library file
+
 v0.3.2 (2017-10-13)
 -------------------
 
