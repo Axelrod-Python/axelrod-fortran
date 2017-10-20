@@ -75,9 +75,9 @@ class Player(axl.Player):
         return self.original_function(*[byref(arg) for arg in args])
 
     def strategy(self, opponent):
-        if type(opponent) is Player\
-           and (opponent.original_name == self.original_name) \
-           and (opponent.shared_library_name == self.shared_library_name):
+        if type(opponent) is Player \
+          and (opponent.original_name == self.original_name) \
+          and (opponent.shared_library_name == self.shared_library_name):
 
             message = """
 You are playing a match with two copies of the same player.
