@@ -7,7 +7,7 @@ characteristics = {
         'author': None,
         'original_rank': None},
     'k31r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.GoByMajority,
         'stochastic': False,
         'author': 'Gail Grisell',
         'original_rank': 23},
