@@ -12,7 +12,7 @@ characteristics = {
         'author': 'Gail Grisell',
         'original_rank': 23},
     'k32r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.Kluepfel,
         'stochastic': True,
         'author': 'Charles Kluepfel',
         'original_rank': 10},
@@ -62,7 +62,7 @@ characteristics = {
         'author': 'Herb Weiner',
         'original_rank': 7},
     'k42r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.Borufsen,
         'stochastic': False,
         'author': 'Otto Borufsen',
         'original_rank': 3},
