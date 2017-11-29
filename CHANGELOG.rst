@@ -1,6 +1,15 @@
 Changelog
 =========
 
+v0.4.1 (2017-11-29)
+-------------------
+
+* Tag K31R as implemented by GoByMajority
+* Tag K32R as implemented by Kluepfel
+* Tag K42R as implemented by Borufsen
+* Tag K44R as implemented by WmAdams
+* Tag K49R as implemented by Cave
+
 v0.4.0 (2017-10-20)
 -------------------
 
