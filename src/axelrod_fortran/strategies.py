@@ -72,7 +72,7 @@ characteristics = {
         'author': 'R D Anderson',
         'original_rank': 39},
     'k44r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.WmAdams,
         'stochastic': True,
         'author': 'William Adams',
         'original_rank': 5},
@@ -97,7 +97,7 @@ characteristics = {
         'author': 'George Hufford',
         'original_rank': 53},
     'k49r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.Cave,
         'stochastic': True,
         'author': 'Rob Cave',
         'original_rank': 4},
