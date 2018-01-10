@@ -1,4 +1,4 @@
-__version__ = "0.4.1"
+__version__ = "0.4.2"
 
 from .player import Player
 from .strategies import (all_strategies, characteristics,
