@@ -1,6 +1,18 @@
 Changelog
 =========
 
+v0.4.2 (2018-01-10)
+-------------------
+
+* Tag K35R as implemented by Getzler
+* Tag K41R as implemented by Weiner
+* Tag K60R as implemented by GraaskampKatzen
+* Tag K68R as implemented by Leyvraz
+* Tag K72R as implemented by White
+* Tag K75R as implemented by Harrington
+* Tag K83R as implemented by Black
+* Tag K84R as implemented by MoreTidemanAndChieruzz
+
 v0.4.1 (2017-11-29)
 -------------------
 
