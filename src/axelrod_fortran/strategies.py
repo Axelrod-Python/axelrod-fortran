@@ -27,7 +27,7 @@ characteristics = {
         'author': 'James W Friedman',
         'original_rank': 52},
     'k35r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.Getzler,
         'stochastic': True,
         'author': 'Abraham Getzler',
         'original_rank': 11},
@@ -57,7 +57,7 @@ characteristics = {
         'author': 'Robert Adams',
         'original_rank': 35},
     'k41r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.Weiner,
         'stochastic': False,
         'author': 'Herb Weiner',
         'original_rank': 7},
@@ -152,7 +152,7 @@ characteristics = {
         'author': 'Leslie Downing',
         'original_rank': 40},
     'k60r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.GraaskampKatzen,
         'stochastic': False,
         'author': 'Jim Graaskamp and Ken Katzen',
         'original_rank': 6},
@@ -192,7 +192,7 @@ characteristics = {
         'author': 'Craig Feathers',
         'original_rank': 27},
     'k68r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.Leyvraz,
         'stochastic': True,
         'author': 'Fransois Leyvraz',
         'original_rank': 12},
@@ -212,7 +212,7 @@ characteristics = {
         'author': 'James E Hall',
         'original_rank': 60},
     'k72r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.White,
         'stochastic': True,
         'author': 'Edward C White Jr',
         'original_rank': 13},
@@ -232,7 +232,7 @@ characteristics = {
         'author': 'Edward Friedland',
         'original_rank': None},
     'k75r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.Harrington,
         'stochastic': True,
         'author': 'Paul D Harrington',
         'original_rank': 8},
@@ -272,12 +272,12 @@ characteristics = {
         'author': 'Robert A Leyland',
         'original_rank': 49},
     'k83r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.Black,
         'stochastic': True,
         'author': 'Paul E Black',
         'original_rank': 15},
     'k84r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.MoreTidemanAndChieruzzi,
         'stochastic': False,
         'author': 'T Nicolaus Tideman and Paula Chieruzz',
         'original_rank': 9},
