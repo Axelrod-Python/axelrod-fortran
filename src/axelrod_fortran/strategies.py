@@ -87,7 +87,7 @@ characteristics = {
         'author': 'Graham J Eatherley',
         'original_rank': 14},
     'k47r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.RichardHufford,
         'stochastic': False,
         'author': 'Richard Hufford',
         'original_rank': 16},

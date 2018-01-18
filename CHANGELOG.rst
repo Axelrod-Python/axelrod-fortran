@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Unreleased
+----------
+
+* Tag K47R as implemented by RichardHufford
+
 v0.4.2 (2018-01-10)
 -------------------
 
