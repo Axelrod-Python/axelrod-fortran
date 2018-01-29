@@ -172,7 +172,7 @@ characteristics = {
         'author': 'George Duisman',
         'original_rank': 57},
     'k64r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.Yamachi,
         'stochastic': False,
         'author': 'Brian Yamachi',
         'original_rank': 17},

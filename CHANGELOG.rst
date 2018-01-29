@@ -5,6 +5,7 @@ Unreleased
 ----------
 
 * Tag K47R as implemented by RichardHufford
+* Tag K64R as implemented by Yamanhi
 
 v0.4.2 (2018-01-10)
 -------------------
