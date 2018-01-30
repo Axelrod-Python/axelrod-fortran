@@ -107,7 +107,7 @@ characteristics = {
         'author': 'Rik Smoody',
         'original_rank': 54},
     'k51r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.Colbert,
         'stochastic': False,
         'author': 'John William Colbert',
         'original_rank': 18},
