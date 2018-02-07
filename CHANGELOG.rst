@@ -1,10 +1,11 @@
 Changelog
 =========
 
-Unreleased
-----------
+v0.4.3 (2018-02-07)
+-------------------
 
 * Tag K47R as implemented by RichardHufford
+* Tag K51R as implemented by Colbert
 * Tag K64R as implemented by Yamanhi
 
 v0.4.2 (2018-01-10)
