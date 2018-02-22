@@ -182,7 +182,7 @@ characteristics = {
         'author': 'Mark F Batell',
         'original_rank': 47},
     'k66r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.Mikkelson,
         'stochastic': False,
         'author': 'Ray Mikkelson',
         'original_rank': 20},
