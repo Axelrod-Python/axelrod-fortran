@@ -1,1 +1,1 @@
-axelrod>=4.0.0
+axelrod>=4.1.0
