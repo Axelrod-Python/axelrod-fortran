@@ -27,7 +27,7 @@ def read(*names, **kwargs):
 
 setup(
     name='axelrod-fortran',
-    version='0.4.3',
+    version='0.4.4',
     license='MIT license',
     description='Python wrapper for strategies originally written in Fortran',
     long_description='%s\n%s' % (
@@ -54,7 +54,7 @@ setup(
         'Topic :: Utilities',
     ],
     install_requires=[
-        'axelrod >= 4.0.0',
+        'axelrod >= 4.1.0',
     ],
     python_requires=">=3.5",
 )
