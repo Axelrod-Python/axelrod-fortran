@@ -1,8 +1,8 @@
 Changelog
 =========
 
-Unreleased
-----------
+v0.4.4 (2018-03-15)
+-------------------
 
 * Tag K66R as implemented by Mikkelson
 
