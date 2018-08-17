@@ -1,6 +1,6 @@
 from axelrod_fortran import Player, characteristics, all_strategies
-from axelrod import (Alternator, Cooperator, Defector,
-                     Match, Game, basic_strategies, seed)
+from axelrod import (Alternator, Cooperator, Defector, Match, MoranProcess,
+                     Game, basic_strategies, seed)
 from axelrod.action import Action
 from ctypes import c_int, c_float, POINTER, CDLL
 
@@ -25,6 +25,7 @@ def test_init():
         assert "libstrategies.so" == player.shared_library_name
         assert type(player.shared_library) is CDLL
         assert "libstrategies.so" in str(player.shared_library)
+
 
 def test_init_with_shared():
     player = Player("k42r", shared_library_name="libstrategies.so")
@@ -106,6 +107,7 @@ def test_original_strategy():
                 my_score += scores[0]
                 their_score += scores[1]
 
+
 def test_deterministic_strategies():
     """
     Test that the strategies classified as deterministic indeed act
@@ -139,6 +141,7 @@ def test_implemented_strategies():
                 axl_match = Match((axl_player, opponent))
                 assert interactions == axl_match.play(), (player, opponent)
 
+
 def test_champion_v_alternator():
     """
     Specific regression test for a bug.
@@ -155,17 +158,20 @@ def test_champion_v_alternator():
     seed(0)
     assert interactions == match.play()
 
+
 def test_warning_for_self_interaction(recwarn):
     """
     Test that a warning is given for a self interaction.
     """
     player = Player("k42r")
     opponent = Player("k42r")
+    opponent = player
 
     match = Match((player, opponent))
 
     interactions = match.play()
-    assert len(recwarn) == 1
+    assert len(recwarn) == 0
+
 
 def test_no_warning_for_normal_interaction(recwarn):
     """
@@ -180,3 +186,11 @@ def test_no_warning_for_normal_interaction(recwarn):
 
         interactions = match.play()
         assert len(recwarn) == 0
+
+
+def test_multiple_copies(recwarn):
+    players = [Player('ktitfortatc') for _ in range(5)] + [
+        Player('k42r') for _ in range(5)]
+    mp = MoranProcess(players)
+    mp.play()
+    mp.populations_plot()

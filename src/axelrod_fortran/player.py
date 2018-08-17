@@ -1,10 +1,16 @@
+from collections import defaultdict
+from ctypes import cdll, c_int, c_float, byref, POINTER
+from ctypes.util import find_library
+import os
 import random
+import shutil
+import tempfile
+import uuid
 import warnings
 
 import axelrod as axl
 from axelrod.interaction_utils import compute_final_score
 from axelrod.action import Action
-from ctypes import cdll, c_int, c_float, byref, POINTER
 from .strategies import characteristics
 
 C, D = Action.C, Action.D
@@ -12,9 +18,97 @@ actions = {0: C, 1: D}
 original_actions = {C: 0, D: 1}
 
 
+self_interaction_message = """
+You are playing a match with the same player against itself. However
+axelrod_fortran players share memory. You can initialise another instance of an
+Axelrod_fortran player with player.clone().
+"""
+
+
+class LibraryManager(object):
+    """LibraryManager creates and loads copies of a shared library, which
+    enables multiple copies of the same strategy to be run without the end user
+    having to maintain many copies of the shared library.
+
+    This works by making a copy of the shared library file and loading it into
+    memory again. Loading the same file again will return a reference to the
+    same memory addresses.
+
+    Additionally, library manager tracks how many copies of the library have
+    been loaded, and how many copies there are of each Player, so as to load
+    only as many copies of the shared library as needed.
+    """
+
+    def __init__(self, shared_library_name, verbose=False):
+        self.shared_library_name = shared_library_name
+        self.verbose = verbose
+        self.library_copies = []
+        self.player_indices = defaultdict(set)
+        self.player_next = defaultdict(set)
+        # Generate a random prefix for tempfile generation
+        self.prefix = str(uuid.uuid4())
+        self.library_path = self.find_shared_library(shared_library_name)
+
+    def find_shared_library(self, shared_library_name):
+        ## This finds only the relative path to the library, unfortunately.
+        # reduced_name = shared_library_name.replace("lib", "").replace(".so", "")
+        # self.library_path = find_library(reduced_name)
+        # Hard code absolute path for testing purposes.
+        return "/usr/lib/libstrategies.so"
+
+    def load_dll_copy(self):
+        # Copy the library file to a new location so we can load the copy.
+        temp_directory = tempfile.gettempdir()
+        copy_number = len(self.library_copies)
+        new_filename = os.path.join(
+            temp_directory,
+            "{}-{}-{}".format(
+                self.prefix,
+                str(copy_number),
+                self.shared_library_name)
+        )
+        if self.verbose:
+            print("Loading {}".format(new_filename))
+        shutil.copy2(self.library_path, new_filename)
+        shared_library = cdll.LoadLibrary(new_filename)
+        self.library_copies.append(shared_library)
+
+    def next_player_index(self, name):
+        """Determine the index of the next free shared library copy to
+        allocate for the player. If none is available then load another copy."""
+        # Is there a free index?
+        if len(self.player_next[name]) > 0:
+            return self.player_next[name].pop()
+        # Do we need to load a new copy?
+        player_count = len(self.player_indices[name])
+        if player_count == len(self.library_copies):
+            self.load_dll_copy()
+            return player_count
+        # Find the first unused index
+        for i in range(len(self.library_copies)):
+            if i not in self.player_indices[name]:
+                return i
+        raise ValueError("We shouldn't be here.")
+
+    def load_library_for_player(self, name):
+        index = self.next_player_index(name)
+        self.player_indices[name].add(index)
+        if self.verbose:
+            print("allocating {}".format(index))
+        return index, self.library_copies[index]
+
+    def release(self, name, index):
+        """Release the copy of the library so that it can be re-allocated."""
+        self.player_indices[name].remove(index)
+        if self.verbose:
+            print("releasing {}".format(index))
+        self.player_next[name].add(index)
+
+
 class Player(axl.Player):
 
     classifier = {"stochastic": True}
+    library_manager = None
 
     def __init__(self, original_name,
                  shared_library_name='libstrategies.so'):
@@ -27,9 +121,11 @@ class Player(axl.Player):
         game: axelrod.Game
             A instance of an axelrod Game
         """
+        if not Player.library_manager:
+            Player.library_manager = LibraryManager(shared_library_name)
         super().__init__()
-        self.shared_library_name = shared_library_name
-        self.shared_library = cdll.LoadLibrary(shared_library_name)
+        self.index, self.shared_library = \
+            self.library_manager.load_library_for_player(original_name)
         self.original_name = original_name
         self.original_function = self.original_name
         is_stochastic = characteristics[self.original_name]['stochastic']
@@ -75,17 +171,8 @@ class Player(axl.Player):
         return self.original_function(*[byref(arg) for arg in args])
 
     def strategy(self, opponent):
-        if type(opponent) is Player \
-          and (opponent.original_name == self.original_name) \
-          and (opponent.shared_library_name == self.shared_library_name):
-
-            message = """
-You are playing a match with two copies of the same player.
-However the axelrod fortran players share memory.
-You can initialise an instance of an Axelrod_fortran player with a
-`shared_library_name`
-variable that points to a copy of the shared library."""
-            warnings.warn(message=message)
+        if self is opponent:
+            warnings.warn(message=self_interaction_message)
 
         if not self.history:
             their_last_move = 0
@@ -107,5 +194,14 @@ variable that points to a copy of the shared library."""
         return actions[original_action]
 
     def reset(self):
+        # Release the library before rest, which regenerates the player.
+        self.library_manager.release(self.original_name, self.index)
         super().reset()
         self.original_function = self.original_name
+
+    def __del__(self):
+        # Release the library before deletion.
+        self.library_manager.release(self.original_name, self.index)
+
+    def __repr__(self):
+        return self.original_name
