@@ -48,6 +48,7 @@ class LibraryManager(object):
         # Generate a random prefix for tempfile generation
         self.prefix = str(uuid.uuid4())
         self.library_path = self.find_shared_library(shared_library_name)
+        self.filenames = []
 
     def find_shared_library(self, shared_library_name):
         ## This finds only the relative path to the library, unfortunately.
@@ -57,6 +58,7 @@ class LibraryManager(object):
         return "/usr/lib/libstrategies.so"
 
     def load_dll_copy(self):
+        """Load a new copy of the shared library."""
         # Copy the library file to a new location so we can load the copy.
         temp_directory = tempfile.gettempdir()
         copy_number = len(self.library_copies)
@@ -70,6 +72,7 @@ class LibraryManager(object):
         if self.verbose:
             print("Loading {}".format(new_filename))
         shutil.copy2(self.library_path, new_filename)
+        self.filenames.append(new_filename)
         shared_library = cdll.LoadLibrary(new_filename)
         self.library_copies.append(shared_library)
 
@@ -91,6 +94,8 @@ class LibraryManager(object):
         raise ValueError("We shouldn't be here.")
 
     def load_library_for_player(self, name):
+        """For a given player return a copy of the shared library for use
+        in a Player class, along with an index for later releasing."""
         index = self.next_player_index(name)
         self.player_indices[name].add(index)
         if self.verbose:
@@ -103,6 +108,12 @@ class LibraryManager(object):
         if self.verbose:
             print("releasing {}".format(index))
         self.player_next[name].add(index)
+
+    def __del__(self):
+        """Cleanup temp files on object deletion."""
+        for filename in self.filenames:
+            if os.path.exists(filename):
+                os.remove(filename)
 
 
 class Player(axl.Player):
@@ -121,13 +132,14 @@ class Player(axl.Player):
         game: axelrod.Game
             A instance of an axelrod Game
         """
+        super().__init__()
         if not Player.library_manager:
             Player.library_manager = LibraryManager(shared_library_name)
-        super().__init__()
         self.index, self.shared_library = \
             self.library_manager.load_library_for_player(original_name)
         self.original_name = original_name
         self.original_function = self.original_name
+
         is_stochastic = characteristics[self.original_name]['stochastic']
         if is_stochastic is not None:
             self.classifier['stochastic'] = is_stochastic
