@@ -2,8 +2,11 @@ from collections import defaultdict
 from ctypes import cdll, c_int, c_float, byref, POINTER
 from ctypes.util import find_library
 import os
+import platform
 import random
+import re
 import shutil
+import subprocess
 import tempfile
 import uuid
 import warnings
@@ -17,6 +20,8 @@ C, D = Action.C, Action.D
 actions = {0: C, 1: D}
 original_actions = {C: 0, D: 1}
 
+
+path_regex = r""".*?\s=>\s(.*?{}.*?)\\"""
 
 self_interaction_message = """
 You are playing a match with the same player against itself. However
@@ -51,11 +56,17 @@ class LibraryManager(object):
         self.filenames = []
 
     def find_shared_library(self, shared_library_name):
-        ## This finds only the relative path to the library, unfortunately.
-        # reduced_name = shared_library_name.replace("lib", "").replace(".so", "")
-        # self.library_path = find_library(reduced_name)
-        # Hard code absolute path for testing purposes.
-        return "/usr/lib/libstrategies.so"
+        # Hack for Linux since find_library doesn't return the full path.
+        if 'Linux' in platform.system():
+            output = subprocess.check_output(["ldconfig", "-p"])
+            for line in str(output).split(r"\n"):
+                rhs = line.split(" => ")[-1]
+                if shared_library_name in rhs:
+                    return rhs
+            raise ValueError("{} not found".format(shared_library_name))
+        else:
+            return find_library(
+                shared_library_name.replace("lib", "").replace(".so", ""))
 
     def load_dll_copy(self):
         """Load a new copy of the shared library."""
