@@ -1,11 +1,13 @@
+from ctypes import c_int, c_float, POINTER, CDLL
+import itertools
+
+import pytest
+
 from axelrod_fortran import Player, characteristics, all_strategies
 from axelrod import (Alternator, Cooperator, Defector, Match, MoranProcess,
                      Game, basic_strategies, seed)
 from axelrod.action import Action
-from ctypes import c_int, c_float, POINTER, CDLL
 
-import itertools
-import pytest
 
 C, D = Action.C, Action.D
 
