@@ -54,9 +54,9 @@ class SharedLibraryManager(object):
             return find_library(
                 shared_library_name.replace("lib", "").replace(".so", ""))
 
-    def load_dll_copy(self):
-        """Load a new copy of the shared library."""
-        # Copy the library file to a new location so we can load the copy.
+    def create_library_copy(self):
+        """Create a new copy of the shared library."""
+        # Copy the library file to a new (temp) location.
         temp_directory = tempfile.gettempdir()
         copy_number = len(self.filenames)
         new_filename = os.path.join(
@@ -73,14 +73,14 @@ class SharedLibraryManager(object):
 
     def next_player_index(self, name):
         """Determine the index of the next free shared library copy to
-        allocate for the player. If none is available then load another copy."""
+        allocate for the player. If none is available then make another copy."""
         # Is there a free index?
         if len(self.player_next[name]) > 0:
             return self.player_next[name].pop()
         # Do we need to load a new copy?
         player_count = len(self.player_indices[name])
         if player_count == len(self.filenames):
-            self.load_dll_copy()
+            self.create_library_copy()
             return player_count
         # Find the first unused index
         for i in range(len(self.filenames)):
@@ -89,8 +89,8 @@ class SharedLibraryManager(object):
         raise ValueError("We shouldn't be here.")
 
     def get_filename_for_player(self, name):
-        """For a given player return a copy of the shared library for use
-        in a Player class, along with an index for later releasing."""
+        """For a given player return a filename for a copy of the shared library
+        for use in a Player class, along with an index for later releasing."""
         index = self.next_player_index(name)
         self.player_indices[name].add(index)
         if self.verbose:
