@@ -14,7 +14,7 @@ import uuid
 def load_library(filename):
     """Loads a shared library."""
     lib = None
-    if os.path.exists(filename):
+    if Path(filename).exists():
         lib = cdll.LoadLibrary(filename)
     return lib
 
@@ -64,7 +64,7 @@ class SharedLibraryManager(object):
             self.prefix,
             str(copy_number),
             self.shared_library_name)
-        new_filename = str(Path(temp_directory) / filename)
+        new_filename = str(Path(temp_directory, filename))
         if self.verbose:
             print("Loading {}".format(new_filename))
         shutil.copy2(self.library_path, new_filename)
@@ -110,7 +110,7 @@ class SharedLibraryManager(object):
             if path.exists():
                 if self.verbose:
                     print("deleting", str(path))
-                os.remove(str(path))
+                path.unlink()
 
 
 # Setup up thread safe library manager.
