@@ -114,6 +114,10 @@ class Player(axl.Player):
         return actions[original_action]
 
     def _release_shared_library(self):
+        # While this looks like we're checking that the shared library file
+        # isn't deleted, the exception is actually thrown in the manager
+        # thread closes before the player class is garbage collected, which
+        # tends to happen at the end of a script.
         try:
             shared_library_manager.release(self.original_name, self.index)
         except FileNotFoundError:
