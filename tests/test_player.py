@@ -156,13 +156,12 @@ def test_warning_for_self_interaction(recwarn):
     Test that a warning is given for a self interaction.
     """
     player = Player("k42r")
-    opponent = Player("k42r")
     opponent = player
 
     match = Match((player, opponent))
 
     interactions = match.play()
-    assert len(recwarn) == 0
+    assert len(recwarn) == 1
 
 
 def test_no_warning_for_normal_interaction(recwarn):
