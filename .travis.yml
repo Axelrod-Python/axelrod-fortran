@@ -10,7 +10,9 @@ before_install:
   - git clone https://github.com/Axelrod-Python/TourExec.git /tmp/TourExec
   - cd /tmp/TourExec
   - sudo make install
-  - export LD_LIBRARY_PATH=/usr/local/lib
+  - echo "/usr/lib/libstrategies.so" | sudo tee /etc/ld.so.conf.d/strategies-lib.conf
+  - sudo ldconfig
+  - ldconfig -p | grep libstrategies.so
   - cd $TRAVIS_BUILD_DIR
 install:
   - pip install -r requirements.txt
