@@ -24,16 +24,6 @@ def test_init():
         assert player.original_function.restype == c_int
         with pytest.raises(ValueError):
             player = Player('test')
-        assert "libstrategies.so" == player.shared_library_name
-        assert type(player.shared_library) is CDLL
-        assert "libstrategies.so" in str(player.shared_library)
-
-
-def test_init_with_shared():
-    player = Player("k42r", shared_library_name="libstrategies.so")
-    assert "libstrategies.so" == player.shared_library_name
-    assert type(player.shared_library) is CDLL
-    assert "libstrategies.so" in str(player.shared_library)
 
 
 def test_matches():
