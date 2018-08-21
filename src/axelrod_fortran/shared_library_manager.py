@@ -3,6 +3,7 @@ from ctypes import cdll
 from ctypes.util import find_library
 from multiprocessing.managers import BaseManager
 import os
+from pathlib import Path
 import platform
 import shutil
 import subprocess
@@ -59,13 +60,11 @@ class SharedLibraryManager(object):
         # Copy the library file to a new (temp) location.
         temp_directory = tempfile.gettempdir()
         copy_number = len(self.filenames)
-        new_filename = os.path.join(
-            temp_directory,
-            "{}-{}-{}".format(
-                self.prefix,
-                str(copy_number),
-                self.shared_library_name)
-        )
+        filename =  "{}-{}-{}".format(
+            self.prefix,
+            str(copy_number),
+            self.shared_library_name)
+        new_filename = str(Path(temp_directory) / filename)
         if self.verbose:
             print("Loading {}".format(new_filename))
         shutil.copy2(self.library_path, new_filename)
@@ -107,10 +106,11 @@ class SharedLibraryManager(object):
     def __del__(self):
         """Cleanup temp files on object deletion."""
         for filename in self.filenames:
-            if os.path.exists(filename):
+            path = Path(filename)
+            if path.exists():
                 if self.verbose:
-                    print("deleting", filename)
-                os.remove(filename)
+                    print("deleting", str(path))
+                os.remove(str(path))
 
 
 # Setup up thread safe library manager.
