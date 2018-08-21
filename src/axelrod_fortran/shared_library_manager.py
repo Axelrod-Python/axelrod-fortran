@@ -2,7 +2,6 @@ from collections import defaultdict
 from ctypes import cdll
 from ctypes.util import find_library
 from multiprocessing.managers import BaseManager
-import os
 from pathlib import Path
 import platform
 import shutil
