@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.4.5 (2018-10-15)
+-------------------
+
+* Add automatic copying of shared library for multiple copies of players
+
 v0.4.4 (2018-03-15)
 -------------------
 
