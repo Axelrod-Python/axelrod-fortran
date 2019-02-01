@@ -142,7 +142,7 @@ characteristics = {
         'author': 'Rudy Nydegger',
         'original_rank': 31},
     'k58r': {
-        'axelrod-python_class': None,
+        'axelrod-python_class': axl.Rowsam,
         'stochastic': False,
         'author': 'Glen Rowsam',
         'original_rank': 21},
