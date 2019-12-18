@@ -147,7 +147,7 @@ characteristics = {
         'author': 'Glen Rowsam',
         'original_rank': 21},
     'k59r': {
-        'axelrod-python_class': axl.RevisedDowning,
+        'axelrod-python_class': None,
         'stochastic': False,
         'author': 'Leslie Downing',
         'original_rank': 40},
