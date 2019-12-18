@@ -12,7 +12,7 @@ characteristics = {
         'author': 'Gail Grisell',
         'original_rank': 23},
     'k32r': {
-        'axelrod-python_class': axl.Kluepfel,
+        'axelrod-python_class': axl.SecondByKluepfel,
         'stochastic': True,
         'author': 'Charles Kluepfel',
         'original_rank': 10},
@@ -27,7 +27,7 @@ characteristics = {
         'author': 'James W Friedman',
         'original_rank': 52},
     'k35r': {
-        'axelrod-python_class': axl.Getzler,
+        'axelrod-python_class': axl.SecondByGetzler,
         'stochastic': True,
         'author': 'Abraham Getzler',
         'original_rank': 11},
@@ -57,12 +57,12 @@ characteristics = {
         'author': 'Robert Adams',
         'original_rank': 35},
     'k41r': {
-        'axelrod-python_class': axl.Weiner,
+        'axelrod-python_class': axl.SecondByWeiner,
         'stochastic': False,
         'author': 'Herb Weiner',
         'original_rank': 7},
     'k42r': {
-        'axelrod-python_class': axl.Borufsen,
+        'axelrod-python_class': axl.SecondByBorufsen,
         'stochastic': False,
         'author': 'Otto Borufsen',
         'original_rank': 3},
@@ -72,7 +72,7 @@ characteristics = {
         'author': 'R D Anderson',
         'original_rank': 39},
     'k44r': {
-        'axelrod-python_class': axl.WmAdams,
+        'axelrod-python_class': axl.SecondByWmAdams,
         'stochastic': True,
         'author': 'William Adams',
         'original_rank': 5},
@@ -87,7 +87,7 @@ characteristics = {
         'author': 'Graham J Eatherley',
         'original_rank': 14},
     'k47r': {
-        'axelrod-python_class': axl.RichardHufford,
+        'axelrod-python_class': axl.SecondByRichardHufford,
         'stochastic': False,
         'author': 'Richard Hufford',
         'original_rank': 16},
@@ -97,7 +97,7 @@ characteristics = {
         'author': 'George Hufford',
         'original_rank': 53},
     'k49r': {
-        'axelrod-python_class': axl.Cave,
+        'axelrod-python_class': axl.SecondByCave,
         'stochastic': True,
         'author': 'Rob Cave',
         'original_rank': 4},
@@ -107,7 +107,7 @@ characteristics = {
         'author': 'Rik Smoody',
         'original_rank': 54},
     'k51r': {
-        'axelrod-python_class': axl.Colbert,
+        'axelrod-python_class': axl.SecondByColbert,
         'stochastic': False,
         'author': 'John William Colbert',
         'original_rank': 18},
@@ -142,7 +142,7 @@ characteristics = {
         'author': 'Rudy Nydegger',
         'original_rank': 31},
     'k58r': {
-        'axelrod-python_class': axl.Rowsam,
+        'axelrod-python_class': axl.SecondByRowsam,
         'stochastic': False,
         'author': 'Glen Rowsam',
         'original_rank': 21},
@@ -152,7 +152,7 @@ characteristics = {
         'author': 'Leslie Downing',
         'original_rank': 40},
     'k60r': {
-        'axelrod-python_class': axl.GraaskampKatzen,
+        'axelrod-python_class': axl.SecondByGraaskampKatzen,
         'stochastic': False,
         'author': 'Jim Graaskamp and Ken Katzen',
         'original_rank': 6},
@@ -172,7 +172,7 @@ characteristics = {
         'author': 'George Duisman',
         'original_rank': 57},
     'k64r': {
-        'axelrod-python_class': axl.Yamachi,
+        'axelrod-python_class': axl.SecondByYamachi,
         'stochastic': False,
         'author': 'Brian Yamachi',
         'original_rank': 17},
@@ -182,17 +182,17 @@ characteristics = {
         'author': 'Mark F Batell',
         'original_rank': 47},
     'k66r': {
-        'axelrod-python_class': axl.Mikkelson,
+        'axelrod-python_class': axl.SecondByMikkelson,
         'stochastic': False,
         'author': 'Ray Mikkelson',
         'original_rank': 20},
     'k67r': {
-        'axelrod-python_class': axl.Tranquilizer,
+        'axelrod-python_class': axl.SecondByTranquilizer,
         'stochastic': True,
         'author': 'Craig Feathers',
         'original_rank': 27},
     'k68r': {
-        'axelrod-python_class': axl.Leyvraz,
+        'axelrod-python_class': axl.SecondByLeyvraz,
         'stochastic': True,
         'author': 'Fransois Leyvraz',
         'original_rank': 12},
@@ -212,7 +212,7 @@ characteristics = {
         'author': 'James E Hall',
         'original_rank': 60},
     'k72r': {
-        'axelrod-python_class': axl.White,
+        'axelrod-python_class': axl.SecondByWhite,
         'stochastic': True,
         'author': 'Edward C White Jr',
         'original_rank': 13},
@@ -232,12 +232,12 @@ characteristics = {
         'author': 'Edward Friedland',
         'original_rank': None},
     'k75r': {
-        'axelrod-python_class': axl.Harrington,
+        'axelrod-python_class': axl.SecondByHarrington,
         'stochastic': True,
         'author': 'Paul D Harrington',
         'original_rank': 8},
     'k76r': {
-        'axelrod-python_class': axl.Gladstein,
+        'axelrod-python_class': axl.SecondByGladstein,
         'stochastic': False,
         'author': 'David Gladstein',
         'original_rank': 46},
@@ -272,12 +272,12 @@ characteristics = {
         'author': 'Robert A Leyland',
         'original_rank': 49},
     'k83r': {
-        'axelrod-python_class': axl.Black,
+        'axelrod-python_class': axl.SecondByBlack,
         'stochastic': True,
         'author': 'Paul E Black',
         'original_rank': 15},
     'k84r': {
-        'axelrod-python_class': axl.MoreTidemanAndChieruzzi,
+        'axelrod-python_class': axl.SecondByTidemanAndChieruzzi,
         'stochastic': False,
         'author': 'T Nicolaus Tideman and Paula Chieruzz',
         'original_rank': 9},
@@ -287,7 +287,7 @@ characteristics = {
         'author': 'Robert B Falk and James M Langsted',
         'original_rank': 33},
     'k86r': {
-        'axelrod-python_class': axl.MoreGrofman,
+        'axelrod-python_class': axl.SecondByGrofman,
         'stochastic': False,
         'author': 'Bernard Grofman',
         'original_rank': 28},
