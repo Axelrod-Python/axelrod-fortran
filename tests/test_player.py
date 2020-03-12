@@ -200,7 +200,7 @@ def test_match_reproducibility():
 def test_tournament_reproducibility():
     rng = RandomGenerator()
     seed = rng.random_seed_int()
-    strategies = rng.choice(all_strategies, size=2)
+    strategies = rng.choice(all_strategies, size=10)
     players1 = [Player(strategy) for strategy in strategies]
     tournament1 = Tournament(players1, seed=seed, repetitions=2)
     results1 = tournament1.play(processes=2)
