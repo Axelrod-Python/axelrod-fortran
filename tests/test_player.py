@@ -22,7 +22,7 @@ def test_init():
             POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int),
             POINTER(c_float))
         assert player.original_function.restype == c_int
-        with pytest.raises(AttributeError):
+        with pytest.raises(ValueError):
             player = Player('test')
 
 
@@ -186,19 +186,21 @@ def test_multiple_copies(recwarn):
 
 
 def test_match_reproducibility():
-    for _ in range(10):
+    for _ in range(100):
         rng = RandomGenerator()
         seed = rng.random_seed_int()
         strategies = rng.choice(all_strategies, size=2)
-        print(strategies)
         players1 = [Player(strategy) for strategy in strategies]
-        # players1 = (p() for p in strategies)
         match1 = Match(players1, turns=200, noise=0.1, seed=seed)
         results1 = match1.play()
+
         players2 = [Player(strategy) for strategy in strategies]
-        # players2 = (p() for p in strategies)
         match2 = Match(players2, turns=200, noise=0.1, seed=seed)
         results2 = match2.play()
+        if results1 != results2:
+            print(strategies)
+            print(results1)
+            print(results2)
         assert (results1 == results2)
 
 
@@ -221,6 +223,6 @@ if __name__ == "__main__":
     test_init()
     test_matches()
     test_noisy_matches()
-    test_implemented_strategies()
+    # test_implemented_strategies()
     test_match_reproducibility()
     test_tournament_reproducibility()
