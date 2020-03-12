@@ -5,7 +5,7 @@ import pytest
 
 from axelrod_fortran import Player, characteristics, all_strategies
 from axelrod import (Alternator, Cooperator, Defector, Match, MoranProcess,
-                     Game, basic_strategies, seed)
+                     Game, RandomGenerator, Tournament, basic_strategies)
 from axelrod.action import Action
 
 
@@ -22,7 +22,7 @@ def test_init():
             POINTER(c_int), POINTER(c_int), POINTER(c_int), POINTER(c_int),
             POINTER(c_float))
         assert player.original_function.restype == c_int
-        with pytest.raises(ValueError):
+        with pytest.raises(AttributeError):
             player = Player('test')
 
 
@@ -122,16 +122,22 @@ def test_implemented_strategies():
     """
     for strategy, dictionary in characteristics.items():
         axelrod_class = dictionary["axelrod-python_class"]
-        player = Player(strategy)
-        if (axelrod_class is not None and
-            player.classifier["stochastic"] is False):
-            axl_player = axelrod_class()
+        stochastic = Player(strategy).classifier["stochastic"]
+        if axelrod_class is not None and not stochastic:
             for opponent_strategy in basic_strategies:
+                player = Player(strategy)
                 opponent = opponent_strategy()
                 match = Match((player, opponent))
                 interactions = match.play()
+
+                axl_player = axelrod_class()
+                opponent = opponent_strategy()
                 axl_match = Match((axl_player, opponent))
-                assert interactions == axl_match.play(), (player, opponent)
+                axl_interactions = axl_match.play()
+                print(player, axl_player, opponent)
+                print(interactions)
+                print(axl_interactions)
+                assert interactions == axl_interactions
 
 
 def test_champion_v_alternator():
@@ -140,15 +146,12 @@ def test_champion_v_alternator():
     """
     player = Player("k61r")
     opponent = Alternator()
-
     match = Match((player, opponent))
 
-    seed(0)
-    interactions = match.play()
+    seed = 0
+    interactions = match.play(seed=seed)
     assert interactions[25:30] == [(C, D), (C, C), (C, D), (D, C), (C, D)]
-
-    seed(0)
-    assert interactions == match.play()
+    assert interactions == match.play(seed=seed)
 
 
 def test_warning_for_self_interaction(recwarn):
@@ -157,9 +160,7 @@ def test_warning_for_self_interaction(recwarn):
     """
     player = Player("k42r")
     opponent = player
-
     match = Match((player, opponent))
-
     interactions = match.play()
     assert len(recwarn) == 1
 
@@ -168,13 +169,10 @@ def test_no_warning_for_normal_interaction(recwarn):
     """
     Test that a warning is not given for a normal interaction
     """
-    player = Player("k42r")
-    opponent = Alternator()
     for players in [(Player("k42r"), Alternator()),
                     (Player("k42r"), Player("k41r"))]:
 
         match = Match(players)
-
         interactions = match.play()
         assert len(recwarn) == 0
 
@@ -185,3 +183,44 @@ def test_multiple_copies(recwarn):
     mp = MoranProcess(players)
     mp.play()
     mp.populations_plot()
+
+
+def test_match_reproducibility():
+    for _ in range(10):
+        rng = RandomGenerator()
+        seed = rng.random_seed_int()
+        strategies = rng.choice(all_strategies, size=2)
+        print(strategies)
+        players1 = [Player(strategy) for strategy in strategies]
+        # players1 = (p() for p in strategies)
+        match1 = Match(players1, turns=200, noise=0.1, seed=seed)
+        results1 = match1.play()
+        players2 = [Player(strategy) for strategy in strategies]
+        # players2 = (p() for p in strategies)
+        match2 = Match(players2, turns=200, noise=0.1, seed=seed)
+        results2 = match2.play()
+        assert (results1 == results2)
+
+
+def test_tournament_reproducibility():
+    rng = RandomGenerator()
+    seed = rng.random_seed_int()
+    strategies = rng.choice(all_strategies, size=2)
+    players1 = [Player(strategy) for strategy in strategies]
+    tournament1 = Tournament(players1, seed=seed, repetitions=2)
+    results1 = tournament1.play(processes=2)
+
+    players2 = [Player(strategy) for strategy in strategies]
+    tournament2 = Tournament(players2, seed=seed, repetitions=2)
+    results2 = tournament2.play(processes=2)
+
+    assert (results1.ranked_names == results2.ranked_names)
+
+
+if __name__ == "__main__":
+    test_init()
+    test_matches()
+    test_noisy_matches()
+    test_implemented_strategies()
+    test_match_reproducibility()
+    test_tournament_reproducibility()

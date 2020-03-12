@@ -45,7 +45,7 @@ class Player(axl.Player):
         self.index, self.shared_library_filename = \
             shared_library_manager.get_filename_for_player(original_name)
         self.shared_library = load_library(self.shared_library_filename)
-        self.original_name = original_name
+        self.__original_name = original_name
         self.original_function = self.original_name
         is_stochastic = characteristics[self.original_name]['stochastic']
         if is_stochastic is not None:

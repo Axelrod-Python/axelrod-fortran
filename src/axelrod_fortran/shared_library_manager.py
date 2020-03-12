@@ -59,7 +59,7 @@ class SharedLibraryManager(object):
         # Copy the library file to a new (temp) location.
         temp_directory = tempfile.gettempdir()
         copy_number = len(self.filenames)
-        filename =  "{}-{}-{}".format(
+        filename = "{}-{}-{}".format(
             self.prefix,
             str(copy_number),
             self.shared_library_name)

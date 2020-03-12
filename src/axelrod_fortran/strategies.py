@@ -348,7 +348,7 @@ characteristics = {
         'original_rank': None},
 }
 
-all_strategies = characteristics.keys()
+all_strategies = list(characteristics.keys())
 
 # Players from Axelrod's second tournament.
 second_tournament_strategies = [
