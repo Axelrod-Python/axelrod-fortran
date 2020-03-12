@@ -51,7 +51,6 @@ class Player(axl.Player):
         if is_stochastic is not None:
             self.classifier['stochastic'] = is_stochastic
 
-
     def __enter__(self):
         return self
 
@@ -105,7 +104,7 @@ class Player(axl.Player):
             my_last_move = original_actions[self.history[-1]]
         move_number = len(self.history) + 1
         if self.classifier["stochastic"]:
-            random_value = random.random()
+            random_value = self._random.random()
         else:
             random_value = 0
         original_action = self.original_strategy(
