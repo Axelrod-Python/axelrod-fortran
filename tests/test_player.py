@@ -134,9 +134,6 @@ def test_implemented_strategies():
                 opponent = opponent_strategy()
                 axl_match = Match((axl_player, opponent))
                 axl_interactions = axl_match.play()
-                print(player, axl_player, opponent)
-                print(interactions)
-                print(axl_interactions)
                 assert interactions == axl_interactions
 
 
@@ -146,12 +143,11 @@ def test_champion_v_alternator():
     """
     player = Player("k61r")
     opponent = Alternator()
-    match = Match((player, opponent))
-
     seed = 0
-    interactions = match.play(seed=seed)
+    match = Match((player, opponent), seed=seed)
+    interactions = match.play()
     assert interactions[25:30] == [(C, D), (C, C), (C, D), (D, C), (C, D)]
-    assert interactions == match.play(seed=seed)
+    assert interactions == match.play()
 
 
 def test_warning_for_self_interaction(recwarn):
@@ -197,10 +193,7 @@ def test_match_reproducibility():
         players2 = [Player(strategy) for strategy in strategies]
         match2 = Match(players2, turns=200, noise=0.1, seed=seed)
         results2 = match2.play()
-        if results1 != results2:
-            print(strategies)
-            print(results1)
-            print(results2)
+
         assert (results1 == results2)
 
 
@@ -218,11 +211,3 @@ def test_tournament_reproducibility():
 
     assert (results1.ranked_names == results2.ranked_names)
 
-
-if __name__ == "__main__":
-    test_init()
-    test_matches()
-    test_noisy_matches()
-    # test_implemented_strategies()
-    test_match_reproducibility()
-    test_tournament_reproducibility()
