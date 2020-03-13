@@ -1,6 +1,12 @@
 Changelog
 =========
 
+v0.4.7 (2020-03-13)
+-------------------
+
+* Rename strategies to match latest axelrod names
+* Remove tag showing K59R as implemented by axl.RevisedDowning
+
 v0.4.6 (2019-01-01)
 -------------------
 
