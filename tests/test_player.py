@@ -1,4 +1,4 @@
-from ctypes import c_int, c_float, POINTER, CDLL
+from ctypes import c_int, c_float, POINTER
 import itertools
 
 import pytest
@@ -139,14 +139,16 @@ def test_implemented_strategies():
 
 def test_champion_v_alternator():
     """
-    Specific regression test for a bug.
+    Specific regression test for a bug. See:
+    https://github.com/Axelrod-Python/axelrod-fortran/issues/62
     """
     player = Player("k61r")
     opponent = Alternator()
-    seed = 0
+    seed = 3
     match = Match((player, opponent), seed=seed)
     interactions = match.play()
     assert interactions[25:30] == [(C, D), (C, C), (C, D), (D, C), (C, D)]
+    match = Match((player, opponent), seed=seed)
     assert interactions == match.play()
 
 

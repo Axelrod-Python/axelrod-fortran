@@ -1,5 +1,4 @@
 from ctypes import byref, c_float, c_int, POINTER
-import random
 import warnings
 
 import axelrod as axl
