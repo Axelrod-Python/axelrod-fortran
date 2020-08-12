@@ -1,5 +1,4 @@
 from ctypes import byref, c_float, c_int, POINTER
-import random
 import warnings
 
 import axelrod as axl
@@ -42,15 +41,18 @@ class Player(axl.Player):
             A instance of an axelrod Game
         """
         super().__init__()
-        self.index, self.shared_library_filename = \
-            shared_library_manager.get_filename_for_player(original_name)
-        self.shared_library = load_library(self.shared_library_filename)
+        # The order of the next 4 lines is important. We must first check that
+        # the player name is valid, then grab a copy of the shared library,
+        # and then setup the actual strategy function.
         self.original_name = original_name
+        self.index, self.shared_library_filename = \
+            shared_library_manager.get_filename_for_player(self.original_name)
+        self.shared_library = load_library(self.shared_library_filename)
         self.original_function = self.original_name
+
         is_stochastic = characteristics[self.original_name]['stochastic']
         if is_stochastic is not None:
             self.classifier['stochastic'] = is_stochastic
-
 
     def __enter__(self):
         return self
@@ -63,11 +65,11 @@ class Player(axl.Player):
         return self.__original_name
 
     @original_name.setter
-    def original_name(self, value):
-        if value in characteristics:
-            self.__original_name = value
+    def original_name(self, key):
+        if key in characteristics:
+            self.__original_name = key
         else:
-            raise ValueError('{} is not a valid Fortran function'.format(value))
+            raise ValueError('{} is not a valid Fortran function'.format(key))
 
     @property
     def original_function(self):
@@ -105,7 +107,7 @@ class Player(axl.Player):
             my_last_move = original_actions[self.history[-1]]
         move_number = len(self.history) + 1
         if self.classifier["stochastic"]:
-            random_value = random.random()
+            random_value = self._random.random()
         else:
             random_value = 0
         original_action = self.original_strategy(
@@ -119,7 +121,16 @@ class Player(axl.Player):
         # thread closes before the player class is garbage collected, which
         # tends to happen at the end of a script.
         try:
-            shared_library_manager.release(self.original_name, self.index)
+            name = self.original_name
+            index = self.index
+        except AttributeError:
+            # If the Player does finish __init__, because the name of a
+            # non-existent strategy is supplied, a copy of the shared library
+            # won't be loaded, nor will self.original_name or self.index
+            # exist. In that case there's nothing to do.
+            return
+        try:
+            shared_library_manager.release(name, index)
         except FileNotFoundError:
             pass
 
