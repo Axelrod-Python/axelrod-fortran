@@ -1,6 +1,13 @@
 Changelog
 =========
 
+v0.4.8 (2020-08-20)
+-------------------
+
+* Remove support for Python 3.5
+* Add support for Python 3.7
+* Add support for random seeding
+
 v0.4.7 (2020-03-13)
 -------------------
 
