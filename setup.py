@@ -27,7 +27,7 @@ def read(*names, **kwargs):
 
 setup(
     name='axelrod-fortran',
-    version='0.4.7',
+    version='0.4.8',
     license='MIT license',
     description='Python wrapper for strategies originally written in Fortran',
     long_description='%s\n%s' % (
